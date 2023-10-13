@@ -21,7 +21,6 @@ public class OpenApiConfig {
                 ).externalDocs(new ExternalDocumentation()
                         .description("")
                         .url("")
-
                 );
     }
 }

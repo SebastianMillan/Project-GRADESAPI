@@ -1,9 +1,6 @@
 package com.salesianostriana.dam.gradesapi.controller;
 
-import com.salesianostriana.dam.gradesapi.Dto.CreateAlumnoDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoDetailsDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoListDto;
+import com.salesianostriana.dam.gradesapi.Dto.*;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
 import com.salesianostriana.dam.gradesapi.repositorios.AlumnoRepositorio;
 import com.salesianostriana.dam.gradesapi.servicios.AlumnoServicio;
@@ -75,6 +72,22 @@ public class AlumnoController {
     @Operation(summary = "create Alumno", description = "Creación de un alumno")
     @PostMapping("/")
     public ResponseEntity<GetAlumnoDto> createAlumno(@RequestBody CreateAlumnoDto nuevo){
-        return ResponseEntity.status(201).body(GetAlumnoDto.of(alumnoServicio.save(nuevo)));
+        return ResponseEntity.status(201).body(GetAlumnoDto.of(alumnoServicio.saveToCreate(nuevo)));
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoListDto.class))
+                    )})
+    }
+    )
+    @Operation(summary = "editById Alumno", description = "Editar alumno obtenido por su ID")
+    @PutMapping("/{id}")
+    public ResponseEntity<GetAlumnoListDto> editAlumno(@RequestBody EditAlumnoDto editado, @PathVariable Long id){
+        if(alumnoRepositorio.findById(id).isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(GetAlumnoListDto.of(alumnoServicio.saveToEdit(editado, id)));
     }
 }

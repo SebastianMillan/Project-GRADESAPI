@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.gradesapi.controller;
 
 import com.salesianostriana.dam.gradesapi.Dto.CreateAlumnoDto;
+import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoDetailsDto;
 import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoDto;
 import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoListDto;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
@@ -35,7 +36,7 @@ public class AlumnoController {
                     )})
             }
     )
-    @Operation(summary = "findAll alumnos", description = "Obtener todos los alumnos")
+    @Operation(summary = "findAll Alumnos", description = "Obtener todos los alumnos")
     @GetMapping("/")
     public ResponseEntity<List<GetAlumnoListDto>> getAll(){
         List<Alumno> alumnos = alumnoRepositorio.findAll();
@@ -51,13 +52,27 @@ public class AlumnoController {
     }
 
     @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDetailsDto.class))
+                    )})
+    }
+    )
+    @Operation(summary = "findById Alumno", description = "Obtener un alumno por su ID")
+    @GetMapping("/{id}")
+    public ResponseEntity<GetAlumnoDetailsDto> findById(@PathVariable Long id){
+        return ResponseEntity.of(alumnoRepositorio.findById(id)
+                .map(GetAlumnoDetailsDto::of));
+    }
+
+    @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class))
                     )})
     }
     )
-    @Operation(summary = "create alumno", description = "Creación de un alumno")
+    @Operation(summary = "create Alumno", description = "Creación de un alumno")
     @PostMapping("/")
     public ResponseEntity<GetAlumnoDto> createAlumno(@RequestBody CreateAlumnoDto nuevo){
         return ResponseEntity.status(201).body(GetAlumnoDto.of(alumnoServicio.save(nuevo)));

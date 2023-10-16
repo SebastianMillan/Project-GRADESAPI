@@ -1,9 +1,6 @@
 package com.salesianostriana.dam.gradesapi.controller;
 
-import com.salesianostriana.dam.gradesapi.Dto.CreateAsignaturaDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoDetailsDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetAsignaturaDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetAsignaturaListDto;
+import com.salesianostriana.dam.gradesapi.Dto.*;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.servicios.AsignaturaServicio;
@@ -60,5 +57,11 @@ public class AsignaturaController {
                         .map(GetAsignaturaListDto::of)
                         .toList()
         );
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<GetAsignaturaDetailsDto> findById(@PathVariable Long id){
+        return ResponseEntity.of(asignaturaRepositorio.findById(id)
+                .map(GetAsignaturaDetailsDto::of));
     }
 }

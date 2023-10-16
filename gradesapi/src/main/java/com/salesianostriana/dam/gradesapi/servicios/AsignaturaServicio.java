@@ -6,6 +6,7 @@ import com.salesianostriana.dam.gradesapi.Dto.GetReferenteShortDto;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
+import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacionPK;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -56,13 +57,22 @@ public class AsignaturaServicio {
         return repositorio.save(a);
     }
 
-    public Optional<ReferenteEvaluacion> findByCodAndAsig(Asignatura a, String cod_ref){
+    public Optional<ReferenteEvaluacion> findByCodAndAsig(String cod_ref, Asignatura a){
         return repositorio.findByCodAndAsig(a, cod_ref);
     }
 
-    public Asignatura editRefOfAsig(Asignatura a, ReferenteEvaluacion rf, GetReferenteShortDto textToEdit){
-        rf.setDescripcion(textToEdit.descripcion());
-        a.addReferente(rf);
+    public Asignatura editRefOfAsig(String cod_ref, Asignatura a, GetReferenteShortDto textToEdit){
+        Optional<ReferenteEvaluacion> rf = findByCodAndAsig(cod_ref, a);
+        if(rf.isEmpty())
+            return a;
+
+        a.removeReferente(rf.get());
+        ReferenteEvaluacion rfNuevo = new ReferenteEvaluacion(
+                a,
+                cod_ref,
+                textToEdit.descripcion()
+        );
+        a.addReferente(rfNuevo);
         return repositorio.save(a);
     }
 }

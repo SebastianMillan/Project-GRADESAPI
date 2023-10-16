@@ -111,18 +111,11 @@ public class AsignaturaController {
     public ResponseEntity<GetAsignaturaDetailsDto> editRefOfAsig(@PathVariable Long id, @PathVariable String cod_ref, @RequestBody GetReferenteShortDto textRefEdit){
         Optional<Asignatura> as = asignaturaRepositorio.findById(id);
         Optional<ReferenteEvaluacion> rf;
-        if(as.isEmpty()){
+        if(as.isEmpty())
             return ResponseEntity.notFound().build();
-        }else{
-            rf = asignaturaServicio.findByCodAndAsig(as.get(), cod_ref);
-            if(rf.isEmpty()){
-                return ResponseEntity.notFound().build();
-            }else{
-                return ResponseEntity.ok(GetAsignaturaDetailsDto.of(asignaturaServicio.editRefOfAsig(as.get(), rf.get(), textRefEdit)));
-            }
 
+        return ResponseEntity.ok(GetAsignaturaDetailsDto.of(asignaturaServicio.editRefOfAsig(cod_ref, as.get(), textRefEdit)));
 
-        }
 
     }
 }

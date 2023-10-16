@@ -1,10 +1,12 @@
 package com.salesianostriana.dam.gradesapi.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class Asignatura {
     private String descripcion;
 
     @OneToMany(mappedBy = "asignatura", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private List<ReferenteEvaluacion> referentes = new ArrayList<>();
 
     // Helpers

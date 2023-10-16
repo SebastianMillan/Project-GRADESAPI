@@ -9,7 +9,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public record GetAlumnoDetailsDto(Long id, String nombre, String apellidos, String email, String telefono, String fechaNacimiento,
-                                  Set<GetAsignaturaDto> asignaturas) {
+                                  Set<GetAsignaturaEnAlumnoDto> asignaturas) {
 
     public static GetAlumnoDetailsDto of(Alumno a){
         return new GetAlumnoDetailsDto(
@@ -20,7 +20,7 @@ public record GetAlumnoDetailsDto(Long id, String nombre, String apellidos, Stri
                 a.getTelefono(),
                 a.getFechaNacimiento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
                 a.getAsignaturas().stream()
-                        .map(GetAsignaturaDto::of)
+                        .map(GetAsignaturaEnAlumnoDto::of)
                         .collect(Collectors.toSet())
         );
     }

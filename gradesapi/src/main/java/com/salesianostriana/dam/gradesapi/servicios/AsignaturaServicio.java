@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +54,15 @@ public class AsignaturaServicio {
             ));
         }
         return repositorio.save(a);
+    }
 
+    public Optional<ReferenteEvaluacion> findByCodAndAsig(Asignatura a, String cod_ref){
+        return repositorio.findByCodAndAsig(a, cod_ref);
+    }
+
+    public Asignatura editRefOfAsig(Asignatura a, ReferenteEvaluacion rf, GetReferenteShortDto textToEdit){
+        rf.setDescripcion(textToEdit.descripcion());
+        a.addReferente(rf);
+        return repositorio.save(a);
     }
 }

@@ -2,6 +2,7 @@ package com.salesianostriana.dam.gradesapi.controller;
 
 import com.salesianostriana.dam.gradesapi.Dto.*;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
+import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.servicios.AsignaturaServicio;
 import io.swagger.v3.oas.annotations.Operation;
@@ -103,6 +104,25 @@ public class AsignaturaController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(GetAsignaturaListDto.of(asignaturaServicio.saveToEdit(editado, id)));
+
+    }
+
+    @PutMapping("/{id}/referente/{cod_ref}")
+    public ResponseEntity<GetAsignaturaDetailsDto> editRefOfAsig(@PathVariable Long id, @PathVariable String cod_ref, @RequestBody GetReferenteShortDto textRefEdit){
+        Optional<Asignatura> as = asignaturaRepositorio.findById(id);
+        Optional<ReferenteEvaluacion> rf;
+        if(as.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            rf = asignaturaServicio.findByCodAndAsig(as.get(), cod_ref);
+            if(rf.isEmpty()){
+                return ResponseEntity.notFound().build();
+            }else{
+                return ResponseEntity.ok(GetAsignaturaDetailsDto.of(asignaturaServicio.editRefOfAsig(as.get(), rf.get(), textRefEdit)));
+            }
+
+
+        }
 
     }
 }

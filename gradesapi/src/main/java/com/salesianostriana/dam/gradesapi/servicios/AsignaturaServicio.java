@@ -29,6 +29,21 @@ public class AsignaturaServicio {
         return repositorio.save(a);
     }
 
+    public Asignatura saveToEdit(CreateAsignaturaDto editado, Long id){
+        List<ReferenteEvaluacion> referentes = new ArrayList<>();
+        Asignatura a = new Asignatura(
+                id,
+                editado.nombre(),
+                editado.horas(),
+                editado.descripcion(),
+                repositorio.findById(id).isPresent() ?
+                        repositorio.findById(id).get().getReferentes()
+                        : referentes
+
+        );
+        return repositorio.save(a);
+    }
+
     public Asignatura addRefToAsig(Asignatura a, GetReferenteShortDto[] referentes){
         for (GetReferenteShortDto referente : referentes) {
             a.addReferente(new ReferenteEvaluacion(

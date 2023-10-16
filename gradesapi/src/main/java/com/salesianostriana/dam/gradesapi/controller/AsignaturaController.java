@@ -87,8 +87,22 @@ public class AsignaturaController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.status(201).body(GetAsignaturaDetailsDto.of(asignaturaServicio.addRefToAsig(as.get(), referentes)));
+    }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaListDto.class))
+                    )})
+    })
+    @Operation(summary = "editarAsignatura", description = "Editar una Asignatura")
+    @PutMapping("/{id}")
+    public ResponseEntity<GetAsignaturaListDto> editAsig(@PathVariable Long id, @RequestBody CreateAsignaturaDto editado){
+        Optional<Asignatura> as = asignaturaRepositorio.findById(id);
+        if(as.isEmpty())
+            return ResponseEntity.notFound().build();
 
+        return ResponseEntity.ok(GetAsignaturaListDto.of(asignaturaServicio.saveToEdit(editado, id)));
 
     }
 }

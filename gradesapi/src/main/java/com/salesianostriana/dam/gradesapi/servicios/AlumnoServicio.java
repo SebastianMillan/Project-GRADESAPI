@@ -2,6 +2,7 @@ package com.salesianostriana.dam.gradesapi.servicios;
 
 import com.salesianostriana.dam.gradesapi.Dto.CreateAlumnoDto;
 import com.salesianostriana.dam.gradesapi.Dto.EditAlumnoDto;
+import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoDto;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.repositorios.AlumnoRepositorio;
@@ -53,4 +54,11 @@ public class AlumnoServicio {
         );
         return alumnoRepositorio.save(a);
     }
+
+    /*
+    public void addAsig(Alumno a, Asignatura as){
+        a.getAsignaturas().add(as);
+        alumnoRepositorio.save(a);
+    }
+    */
 }

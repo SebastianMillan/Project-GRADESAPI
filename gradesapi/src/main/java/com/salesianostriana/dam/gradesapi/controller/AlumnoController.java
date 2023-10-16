@@ -2,7 +2,9 @@ package com.salesianostriana.dam.gradesapi.controller;
 
 import com.salesianostriana.dam.gradesapi.Dto.*;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
+import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.repositorios.AlumnoRepositorio;
+import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.servicios.AlumnoServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/alumno")
@@ -24,6 +27,7 @@ import java.util.List;
 public class AlumnoController {
 
     private final AlumnoRepositorio alumnoRepositorio;
+    private final AsignaturaRepositorio asignaturaRepositorio;
     private final AlumnoServicio alumnoServicio;
 
     @ApiResponses(value = {
@@ -89,5 +93,23 @@ public class AlumnoController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(GetAlumnoListDto.of(alumnoServicio.saveToEdit(editado, id)));
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "")
+    })
+    @Operation(summary = "addAsignaturaToAlumno", description = "Matriculación de un Alumno en una Asignatura")
+    @PostMapping("/{id}/matricula/{id_asig}")
+    public ResponseEntity<?> addAsigToAlum(@PathVariable Long id, @PathVariable Long id_asig){
+        Optional<Alumno> a = alumnoRepositorio.findById(id);
+        Optional<Asignatura> as = asignaturaRepositorio.findById(id_asig);
+
+        if(a.isEmpty() || as.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            a.get().getAsignaturas().add(as.get());
+            alumnoRepositorio.save(a.get());
+            return ResponseEntity.status(201).build();
+        }
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/asignatura")
@@ -59,9 +60,35 @@ public class AsignaturaController {
         );
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
+                    )})
+    })
+    @Operation(summary = "findById Asignatura", description = "Obtener una asignatura por su ID")
     @GetMapping("/{id}")
     public ResponseEntity<GetAsignaturaDetailsDto> findById(@PathVariable Long id){
         return ResponseEntity.of(asignaturaRepositorio.findById(id)
                 .map(GetAsignaturaDetailsDto::of));
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
+                    )})
+    })
+    @Operation(summary = "addReferenteEvaluacionToAsignatura", description = "Añadir uno o varios Referentes de Evaluación a una Asignatura")
+    @PostMapping("/{id}/referente")
+    public ResponseEntity<GetAsignaturaDetailsDto> addRefToAsig(@PathVariable Long id, @RequestBody GetReferenteShortDto[] referentes){
+        Optional<Asignatura> as = asignaturaRepositorio.findById(id);
+        if(as.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.status(201).body(GetAsignaturaDetailsDto.of(asignaturaServicio.addRefToAsig(as.get(), referentes)));
+
+
+
     }
 }

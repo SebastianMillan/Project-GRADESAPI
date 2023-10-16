@@ -107,9 +107,7 @@ public class AlumnoController {
         if(a.isEmpty() || as.isEmpty()){
             return ResponseEntity.notFound().build();
         }else{
-            //Hacer esto en servicio
-            a.get().getAsignaturas().add(as.get());
-            alumnoRepositorio.save(a.get());
+            alumnoServicio.addAsig(a.get(),as.get());
             return ResponseEntity.status(201).build();
         }
     }

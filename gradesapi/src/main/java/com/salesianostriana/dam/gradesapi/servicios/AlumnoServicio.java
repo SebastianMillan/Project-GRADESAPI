@@ -54,10 +54,8 @@ public class AlumnoServicio {
         return alumnoRepositorio.save(a);
     }
 
-    /*
     public void addAsig(Alumno a, Asignatura as){
         a.getAsignaturas().add(as);
         alumnoRepositorio.save(a);
     }
-    */
 }

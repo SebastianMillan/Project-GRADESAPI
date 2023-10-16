@@ -28,15 +28,14 @@ public class AlumnoServicio {
                 .map(asignaturaRepositorio::getReferenceById)
                 .collect(Collectors.toSet());
 
-        Alumno a = new Alumno(
-                nuevo.id(),
-                nuevo.nombre(),
-                nuevo.apellidos(),
-                nuevo.email(),
-                nuevo.telefono(),
-                LocalDate.parse(nuevo.fechaNacimiento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                asignaturas
-        );
+        Alumno a = new Alumno();
+        a.setApellidos(nuevo.apellidos());
+        a.setEmail(nuevo.email());
+        a.setNombre(nuevo.nombre());
+        a.setFechaNacimiento(LocalDate.parse(nuevo.fechaNacimiento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        a.setTelefono(nuevo.telefono());
+        a.setAsignaturas(asignaturas);
+
         return alumnoRepositorio.save(a);
     }
     public Alumno saveToEdit(EditAlumnoDto nuevo, Long id){

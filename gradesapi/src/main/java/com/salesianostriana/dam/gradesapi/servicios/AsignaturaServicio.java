@@ -2,6 +2,7 @@ package com.salesianostriana.dam.gradesapi.servicios;
 
 import com.salesianostriana.dam.gradesapi.Dto.CreateAsignaturaDto;
 import com.salesianostriana.dam.gradesapi.Dto.GetAsignaturaDto;
+import com.salesianostriana.dam.gradesapi.Dto.GetReferenteShortDto;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
@@ -26,5 +27,17 @@ public class AsignaturaServicio {
         a.setNombre(nuevo.nombre());
         a.setReferentes(referentes);
         return repositorio.save(a);
+    }
+
+    public Asignatura addRefToAsig(Asignatura a, GetReferenteShortDto[] referentes){
+        for (GetReferenteShortDto referente : referentes) {
+            a.addReferente(new ReferenteEvaluacion(
+                    a,
+                    "RA0"+a.getId()+"."+a.getNombre().substring(0,5)+"."+(Math.random()*a.getReferentes().size()+1),
+                    referente.descripcion()
+            ));
+        }
+        return repositorio.save(a);
+
     }
 }

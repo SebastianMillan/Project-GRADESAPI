@@ -1,12 +1,15 @@
 package com.salesianostriana.dam.gradesapi.controller;
 
 import com.salesianostriana.dam.gradesapi.Dto.*;
+import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Calificacion;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
+import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import com.salesianostriana.dam.gradesapi.servicios.AlumnoServicio;
 import com.salesianostriana.dam.gradesapi.servicios.CalificacionServicio;
+import com.salesianostriana.dam.gradesapi.servicios.InstrumentoServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -30,6 +33,8 @@ public class CalificacionController {
     private final CalificacionServicio calificacionServicio;
     private final InstrumentoRepositorio instrumentoRepositorio;
     private final CalificacionRepositorio calificacionRepositorio;
+    private final InstrumentoServicio instrumentoServicio;
+    private final AsignaturaRepositorio asignaturaRepositorio;
     private final AlumnoServicio alumnoServicio;
 
     @ApiResponses(value = {
@@ -56,7 +61,7 @@ public class CalificacionController {
                             array = @ArraySchema(schema = @Schema(implementation = GetCalificacionPorInstrumentoDto.class))
                     )})
     })
-    @Operation(summary = "getAll Calificaciones", description = "Obtener todas las Calificaciónes de un Instrumento de todos los Alumnos calificados")
+    @Operation(summary = "getAll Calificaciones by Instrumento", description = "Obtener todas las Calificaciónes de un Instrumento de todos los Alumnos calificados")
     @GetMapping("/instrumento/{id}")
     public ResponseEntity<GetCalificacionPorInstrumentoDto> getAllCalByIns(@PathVariable Long id){
         Optional<Instrumento> ins =  instrumentoRepositorio.findById(id);
@@ -72,6 +77,27 @@ public class CalificacionController {
                                 .map(a -> GetAlumnoEnCalificacionDto.of(a, calificacionServicio.findCalificacionesByInsAndByAl(id, a.getId())))
                                 .toList())
 
+        );
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetCalificacionPorAsigDto.class))
+                    )})
+    })
+    @Operation(summary = "getAll Calificaciones by ReferenteEvaluacion", description = "Obtener todas las Calificaciónes de un Referente de Evaluación de todos los Alumnos calificados")
+    @GetMapping("/referente/{id}/{cod_ref}")
+    public ResponseEntity<GetCalificacionPorAsigDto> findAllCalByAsig(@PathVariable Long id, @PathVariable String cod_ref){
+        Optional<Asignatura> a = asignaturaRepositorio.findById(id);
+
+        if(a.isEmpty() || a.get().getReferentes().isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(
+                new GetCalificacionPorAsigDto(id, cod_ref, alumnoServicio.findAlumsByRef(cod_ref).stream()
+                        .map(al -> GetAlumnoEnCalPorAsigDto.of(al,calificacionServicio.findCalificacionesByRefAndByAl(cod_ref, id)))
+                        .toList())
         );
     }
 

@@ -49,4 +49,8 @@ public class InstrumentoServicio {
     public Optional<Asignatura> findAsigByInsId(Long id){
         return repositorio.findAsigByInsId(id);
     }
+
+    public ReferenteEvaluacion findRefByCodRef(String cod_ref){
+        return repositorio.findRefByCodRef(cod_ref);
+    }
 }

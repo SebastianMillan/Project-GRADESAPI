@@ -48,4 +48,8 @@ public class CalificacionServicio {
     public List<Calificacion> findCalificacionesByInsAndByAl(Long idInstrumento, Long idAlumno){
         return repositorio.findCalificacionesByInsAndByAl(idInstrumento, idAlumno);
     }
+
+    public List<Calificacion> findCalificacionesByRefAndByAl(String cod_ref, Long idAlumno){
+        return repositorio.findCalificacionesByRefAndByAl(cod_ref, idAlumno);
+    }
 }

@@ -11,4 +11,7 @@ public interface AlumnoRepositorio extends JpaRepository<Alumno, Long> {
 
     @Query("SELECT a FROM Calificacion c JOIN c.alumno a WHERE c.instrumento.id = ?1")
     List<Alumno> findAlumsByIdIns(Long idInstrumento);
+
+    @Query("SELECT a FROM Alumno a JOIN a.asignaturas as JOIN as.referentes rf WHERE rf.codReferente LIKE ?1")
+    List<Alumno> findAlumsByRef(String cod_ref);
 }

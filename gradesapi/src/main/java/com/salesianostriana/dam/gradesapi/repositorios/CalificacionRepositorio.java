@@ -16,4 +16,7 @@ public interface CalificacionRepositorio extends JpaRepository<Calificacion, Lon
     @Query("SELECT c FROM Calificacion c WHERE c.instrumento.id = ?1 AND c.alumno.id = ?2")
     List<Calificacion> findCalificacionesByInsAndByAl(Long idInstrumento, Long idAlumno);
 
+    @Query("SELECT c FROM Calificacion c WHERE c.referente.codReferente LIKE ?1 AND c.alumno.id = ?2")
+    List<Calificacion> findCalificacionesByRefAndByAl(String cod_ref, Long idAlumno);
+
 }

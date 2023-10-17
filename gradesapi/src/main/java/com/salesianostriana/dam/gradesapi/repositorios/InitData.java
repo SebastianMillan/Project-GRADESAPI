@@ -108,6 +108,7 @@ public class InitData {
 
         Instrumento i1 = new Instrumento(
                 1L,
+                a1,
                 "Examen Tema 3",
                 LocalDateTime.of(2024,3,20,12, 30),
                 "Creación de tablas y consultas",
@@ -115,6 +116,7 @@ public class InitData {
         );
         Instrumento i2 = new Instrumento(
                 2L,
+                a2,
                 "Examen Tema 5",
                 LocalDateTime.of(2024,2,10,9, 0),
                 "Creación de Clases y métodos",
@@ -122,6 +124,7 @@ public class InitData {
         );
         Instrumento i3 = new Instrumento(
                 3L,
+                a1,
                 "Test",
                 LocalDateTime.of(2023,12,24,13, 30),
                 "Clases CRUD",

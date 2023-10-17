@@ -20,6 +20,9 @@ public class Instrumento {
     @Id @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    private Asignatura asignatura;
+
     private String nombre;
 
     private LocalDateTime fecha;

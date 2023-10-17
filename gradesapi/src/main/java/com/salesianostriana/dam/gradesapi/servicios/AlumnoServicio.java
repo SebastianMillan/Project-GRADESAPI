@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,5 +58,9 @@ public class AlumnoServicio {
     public void addAsig(Alumno a, Asignatura as){
         a.getAsignaturas().add(as);
         alumnoRepositorio.save(a);
+    }
+
+    public List<Alumno> findAlumsByIdIns(Long idInstrumento){
+        return alumnoRepositorio.findAlumsByIdIns(idInstrumento);
     }
 }

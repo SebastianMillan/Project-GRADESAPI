@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,5 +38,9 @@ public class InstrumentoServicio {
                 .map(repositorio::findRefByCodRef)
                 .collect(Collectors.toSet()));
         return repositorio.save(i);
+    }
+
+    public List<Instrumento> findAllInstr(Long idAsig){
+        return repositorio.findAllInstByAsig(idAsig);
     }
 }

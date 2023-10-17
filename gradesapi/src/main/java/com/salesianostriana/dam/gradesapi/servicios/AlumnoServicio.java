@@ -63,4 +63,8 @@ public class AlumnoServicio {
     public List<Alumno> findAlumsByIdIns(Long idInstrumento){
         return alumnoRepositorio.findAlumsByIdIns(idInstrumento);
     }
+
+    public List<Alumno> findAlumsByRef(String cod_ref){
+        return alumnoRepositorio.findAlumsByRef(cod_ref);
+    }
 }

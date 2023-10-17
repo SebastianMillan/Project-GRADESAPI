@@ -45,4 +45,7 @@ public class CalificacionServicio {
             return repositorio.saveAll(calificaciones);
         }
     }
+    public List<Calificacion> findCalificacionesByInsAndByAl(Long idInstrumento, Long idAlumno){
+        return repositorio.findCalificacionesByInsAndByAl(idInstrumento, idAlumno);
+    }
 }

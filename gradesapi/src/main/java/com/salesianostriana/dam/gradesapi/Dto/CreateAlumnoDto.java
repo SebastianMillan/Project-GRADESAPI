@@ -6,6 +6,5 @@ import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import java.time.LocalDate;
 import java.util.Set;
 
-public record CreateAlumnoDto(Long id, String nombre, String apellidos, String email, String telefono, String fechaNacimiento,
-                              Set<Long> asignaturas) {
+public record CreateAlumnoDto(String nombre, String apellidos, String email, String telefono, String fechaNacimiento, Set<Long> asignaturas) {
 }

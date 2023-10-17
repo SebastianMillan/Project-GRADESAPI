@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,15 +29,14 @@ public class AlumnoServicio {
                 .map(asignaturaRepositorio::getReferenceById)
                 .collect(Collectors.toSet());
 
-        Alumno a = new Alumno(
-                nuevo.id(),
-                nuevo.nombre(),
-                nuevo.apellidos(),
-                nuevo.email(),
-                nuevo.telefono(),
-                LocalDate.parse(nuevo.fechaNacimiento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                asignaturas
-        );
+        Alumno a = new Alumno();
+        a.setApellidos(nuevo.apellidos());
+        a.setEmail(nuevo.email());
+        a.setNombre(nuevo.nombre());
+        a.setFechaNacimiento(LocalDate.parse(nuevo.fechaNacimiento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        a.setTelefono(nuevo.telefono());
+        a.setAsignaturas(asignaturas);
+
         return alumnoRepositorio.save(a);
     }
     public Alumno saveToEdit(EditAlumnoDto nuevo, Long id){
@@ -55,10 +55,16 @@ public class AlumnoServicio {
         return alumnoRepositorio.save(a);
     }
 
-    /*
     public void addAsig(Alumno a, Asignatura as){
         a.getAsignaturas().add(as);
         alumnoRepositorio.save(a);
     }
-    */
+
+    public List<Alumno> findAlumsByIdIns(Long idInstrumento){
+        return alumnoRepositorio.findAlumsByIdIns(idInstrumento);
+    }
+
+    public List<Alumno> findAlumsByRef(String cod_ref){
+        return alumnoRepositorio.findAlumsByRef(cod_ref);
+    }
 }

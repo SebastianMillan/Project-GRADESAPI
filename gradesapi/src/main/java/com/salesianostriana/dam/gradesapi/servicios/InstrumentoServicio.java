@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.gradesapi.servicios;
 
 import com.salesianostriana.dam.gradesapi.Dto.CreateInstrumentoDto;
+import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,5 +44,9 @@ public class InstrumentoServicio {
 
     public List<Instrumento> findAllInstr(Long idAsig){
         return repositorio.findAllInstByAsig(idAsig);
+    }
+
+    public Optional<Asignatura> findAsigByInsId(Long id){
+        return repositorio.findAsigByInsId(id);
     }
 }

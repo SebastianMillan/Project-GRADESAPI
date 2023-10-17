@@ -1,12 +1,10 @@
 package com.salesianostriana.dam.gradesapi.controller;
 
-import com.salesianostriana.dam.gradesapi.Dto.CreateInstrumentoDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetAsignaturaDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetInstrumentoDetailsDto;
-import com.salesianostriana.dam.gradesapi.Dto.GetInstrumentoListDto;
+import com.salesianostriana.dam.gradesapi.Dto.*;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
+import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import com.salesianostriana.dam.gradesapi.servicios.InstrumentoServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -29,6 +27,7 @@ import java.util.Optional;
 public class InstrumentoController {
 
     private final InstrumentoServicio instrumentoServicio;
+    private final InstrumentoRepositorio instrumentoRepositorio;
     private final AsignaturaRepositorio asignaturaRepositorio;
 
     @ApiResponses(value = {
@@ -62,8 +61,24 @@ public class InstrumentoController {
                             .map(GetInstrumentoListDto::of)
                             .toList()
         );
-
-
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoCompleteDto.class))
+                    )})
+    })
+    @Operation(summary = "findById Instrumentos", description = "Obtener el detalle de un instrumento por su ID")
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<GetInstrumentoCompleteDto> detailsById(@PathVariable Long id){
+        Optional<Instrumento> i = instrumentoRepositorio.findById(id);
+        Optional<Asignatura> a = instrumentoServicio.findAsigByInsId(id);
+        if(i.isEmpty() || a.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(GetInstrumentoCompleteDto.of(i.get(), a.get()));
+    }
+
 
 }

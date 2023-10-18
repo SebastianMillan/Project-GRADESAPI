@@ -122,6 +122,7 @@ public class AlumnoController {
         if(a.isEmpty())
             return ResponseEntity.notFound().build();
 
+        alumnoServicio.deleteCalToAlum(a.get().getId());
         alumnoRepositorio.delete(a.get());
         return ResponseEntity.noContent().build();
     }

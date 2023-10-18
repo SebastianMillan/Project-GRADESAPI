@@ -5,6 +5,7 @@ import com.salesianostriana.dam.gradesapi.Dto.EditInstrumentoDto;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
+import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class InstrumentoServicio {
 
     private final InstrumentoRepositorio repositorio;
+    private final CalificacionRepositorio calificacionRepositorio;
 
     public Long getIdAsignaturaRefInst(Set<ReferenteEvaluacion> referentes){
         Iterator<ReferenteEvaluacion> it = referentes.iterator();
@@ -47,6 +49,10 @@ public class InstrumentoServicio {
         antiguo.setNombre(edicion.nombre());
         antiguo.setContenidos(edicion.contenidos());
         return repositorio.save(antiguo);
+    }
+    public void deleteIns(Instrumento i){
+        calificacionRepositorio.deleteAll(calificacionRepositorio.findAllCalifByIns(i.getId()));
+        repositorio.delete(i);
     }
 
     public List<Instrumento> findAllInstr(Long idAsig){

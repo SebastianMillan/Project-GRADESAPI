@@ -80,6 +80,13 @@ public class InstrumentoController {
         return ResponseEntity.ok(GetInstrumentoCompleteDto.of(i.get(), a.get()));
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoListDto.class))
+                    )})
+    })
+    @Operation(summary = "edit Instrumentos", description = "Editar un Instrumento por su ID")
     @PutMapping("/{id}")
     public ResponseEntity<GetInstrumentoListDto> editIns(@RequestBody EditInstrumentoDto editado, @PathVariable Long id){
         Optional<Instrumento> i = instrumentoRepositorio.findById(id);
@@ -87,6 +94,20 @@ public class InstrumentoController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(GetInstrumentoListDto.of(instrumentoServicio.saveToEdit(editado, i.get())));
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "")
+    })
+    @Operation(summary = "deleteInstrumento", description = "Eliminar un Instrumento por su ID")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteIns(@PathVariable Long id){
+        Optional<Instrumento> i = instrumentoRepositorio.findById(id);
+        if(i.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        instrumentoServicio.deleteIns(i.get());
+        return ResponseEntity.noContent().build();
     }
 
 

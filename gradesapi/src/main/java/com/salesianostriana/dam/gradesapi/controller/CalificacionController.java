@@ -101,4 +101,19 @@ public class CalificacionController {
         );
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "")
+    })
+    @Operation(summary = "deleteCalificacion", description = "Eliminar una Calificación por su ID")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCal(@PathVariable Long id){
+        Optional<Calificacion> cal = calificacionRepositorio.findById(id);
+
+        if(cal.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        calificacionRepositorio.delete(cal.get());
+        return ResponseEntity.noContent().build();
+    }
+
 }

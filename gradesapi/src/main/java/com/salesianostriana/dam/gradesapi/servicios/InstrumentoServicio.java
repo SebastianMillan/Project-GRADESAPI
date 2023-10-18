@@ -5,6 +5,7 @@ import com.salesianostriana.dam.gradesapi.Dto.EditInstrumentoDto;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
+import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacionPK;
 import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -53,6 +54,19 @@ public class InstrumentoServicio {
     public void deleteIns(Instrumento i){
         calificacionRepositorio.deleteAll(calificacionRepositorio.findAllCalifByIns(i.getId()));
         repositorio.delete(i);
+    }
+    public Instrumento addRefToInst(Instrumento i, String cod_ref){
+        ReferenteEvaluacion rf = findRefByCodRef(cod_ref);
+        if(rf!=null){
+            if(!i.getReferentes().contains(rf)){
+                i.getReferentes().add(rf);
+                return repositorio.save(i);
+            }
+            return repositorio.save(i);
+        }else{
+            return i;
+        }
+
     }
 
     public List<Instrumento> findAllInstr(Long idAsig){

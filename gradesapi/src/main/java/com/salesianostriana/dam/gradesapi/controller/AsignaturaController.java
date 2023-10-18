@@ -30,7 +30,7 @@ public class AsignaturaController {
     private final AsignaturaServicio asignaturaServicio;
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "Creación de una Asignatura con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDto.class))
                     )})
@@ -42,10 +42,12 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Obtención de la Lista de Asignaturas realizada con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaListDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Lista de Asignaturas no encontrada", content = @Content),
+
     })
     @Operation(summary = "findAll Asignatura", description = "Obtener todos los alumnos")
     @GetMapping("/")
@@ -62,10 +64,11 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Conseguir Asignatura con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
     })
     @Operation(summary = "findById Asignatura", description = "Obtener una asignatura por su ID")
     @GetMapping("/{id}")
@@ -75,10 +78,12 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "Crear Referentes de Evaluación para una Asignatura realizado con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
+
     })
     @Operation(summary = "addReferenteEvaluacionToAsignatura", description = "Añadir uno o varios Referentes de Evaluación a una Asignatura")
     @PostMapping("/{id}/referente")
@@ -91,10 +96,12 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Edición de la Asignatura realizada con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaListDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Datos introducidos erroneos", content = @Content)
     })
     @Operation(summary = "editarAsignatura", description = "Editar una Asignatura")
     @PutMapping("/{id}")
@@ -108,10 +115,11 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Edición del Referente de Evaluación de la Asignatura realizado con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content)
     })
     @Operation(summary = "editarDescripcion ReferenteEvaluacion", description = "Editar la descripción del Referente de Evaluación de una Asignatura")
     @PutMapping("/{id}/referente/{cod_ref}")

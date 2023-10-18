@@ -31,11 +31,12 @@ public class AlumnoController {
     private final AlumnoServicio alumnoServicio;
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Listado de Alumnos con exito", content = {
                     @Content(mediaType = "application/json",
                         array = @ArraySchema(schema = @Schema(implementation = GetAlumnoListDto.class))
-                    )})
-            }
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Lista de Alumnos no encontrada", content = @Content)
+    }
     )
     @Operation(summary = "findAll Alumnos", description = "Obtener todos los alumnos")
     @GetMapping("/")
@@ -53,10 +54,11 @@ public class AlumnoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Alumno encontrado con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDetailsDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Alumno no encontrado", content = @Content)
     }
     )
     @Operation(summary = "findById Alumno", description = "Obtener un alumno por su ID")
@@ -67,7 +69,7 @@ public class AlumnoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "Creación de Alumno con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class))
                     )})
@@ -80,10 +82,12 @@ public class AlumnoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Alumno editado con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAlumnoListDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Alumno no encontrado", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Datos introducidos erroneos", content = @Content)
     }
     )
     @Operation(summary = "editById Alumno", description = "Editar alumno obtenido por su ID")
@@ -96,7 +100,9 @@ public class AlumnoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "")
+            @ApiResponse(responseCode = "201", description = "Matriculación de un Alumno a la Asignatura con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Alumno no encontrado", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content)
     })
     @Operation(summary = "addAsignaturaToAlumno", description = "Matriculación de un Alumno en una Asignatura")
     @PostMapping("/{id}/matricula/{id_asig}")
@@ -113,7 +119,8 @@ public class AlumnoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "")
+            @ApiResponse(responseCode = "204", description = "Alumno eliminado con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Alumno no encontrado", content = @Content)
     })
     @Operation(summary = "deleteAlumno", description = "Eliminar Alumno obtenido por ID")
     @DeleteMapping("/{id}")

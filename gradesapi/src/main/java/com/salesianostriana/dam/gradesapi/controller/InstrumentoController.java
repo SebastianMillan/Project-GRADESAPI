@@ -33,10 +33,11 @@ public class InstrumentoController {
     private final AsignaturaRepositorio asignaturaRepositorio;
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "Creación del Instrumento con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoDetailsDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Error en los datos", content = @Content)
     })
     @Operation(summary = "create Instrumento", description = "Creación de una Instrumento de Evaluación")
     @PostMapping("/")
@@ -46,10 +47,12 @@ public class InstrumentoController {
 
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Listado de los Instrumentos creado con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoListDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Lista de Instrumentos vacia", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content)
     })
     @Operation(summary = "findAll Instrumentos", description = "Obtener todos los Instrumentos de una Asignatura")
     @GetMapping("/{id_asig}")
@@ -66,10 +69,12 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Listado detallado del Instrumento creado con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoCompleteDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encotnrado", content = @Content)
     })
     @Operation(summary = "findById Instrumentos", description = "Obtener el detalle de un instrumento por su ID")
     @GetMapping("/detalle/{id}")
@@ -83,10 +88,11 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Instrumento editado con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoListDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encontrado", content = @Content)
     })
     @Operation(summary = "edit Instrumentos", description = "Editar un Instrumento por su ID")
     @PutMapping("/{id}")
@@ -99,7 +105,8 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "")
+            @ApiResponse(responseCode = "204", description = "Instrumento eliminado con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encontrado", content = @Content)
     })
     @Operation(summary = "deleteInstrumento", description = "Eliminar un Instrumento por su ID")
     @DeleteMapping("/{id}")
@@ -113,10 +120,11 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "El Referente de Evaluación se ha añadido con exito al Instrumento", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoCompleteDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encontrado", content = @Content)
     })
     @Operation(summary = "addReferenteToInstrumento", description = "Añadir un Referente de Evaluación a un Instrumento")
     @PostMapping("/{id}/referente/{cod_ref}")

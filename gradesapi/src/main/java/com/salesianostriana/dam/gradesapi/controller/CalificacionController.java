@@ -38,10 +38,11 @@ public class CalificacionController {
     private final AlumnoServicio alumnoServicio;
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "Añadir Calificación con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetCalificacionListDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Calificaciones no encontradas", content = @Content)
     })
     @Operation(summary = "create Calificaciones", description = "Creación de un o varias Calificaciones")
     @PostMapping("/")
@@ -56,10 +57,11 @@ public class CalificacionController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Obtención de la Lista de Calificaciones de un Instrumento realizada con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetCalificacionPorInstrumentoDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encontrado", content = @Content)
     })
     @Operation(summary = "getAll Calificaciones by Instrumento", description = "Obtener todas las Calificaciónes de un Instrumento de todos los Alumnos calificados")
     @GetMapping("/instrumento/{id}")
@@ -81,10 +83,12 @@ public class CalificacionController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Obtención de la Lista de Calificaciones de una Asignatura realizada con exito", content = {
                     @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetCalificacionPorAsigDto.class))
-                    )})
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Referentes de Evaluación de la Asignatura no encontrados", content = @Content),
     })
     @Operation(summary = "getAll Calificaciones by ReferenteEvaluacion", description = "Obtener todas las Calificaciónes de un Referente de Evaluación de todos los Alumnos calificados")
     @GetMapping("/referente/{id}/{cod_ref}")
@@ -102,7 +106,8 @@ public class CalificacionController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "")
+            @ApiResponse(responseCode = "204", description = "Borrado de Calificación realizado con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Calificación no encontrada", content = @Content)
     })
     @Operation(summary = "deleteCalificacion", description = "Eliminar una Calificación por su ID")
     @DeleteMapping("/{id}")

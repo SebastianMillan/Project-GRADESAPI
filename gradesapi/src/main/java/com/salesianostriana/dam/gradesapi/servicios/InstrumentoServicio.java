@@ -6,6 +6,7 @@ import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacionPK;
+import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class InstrumentoServicio {
 
     private final InstrumentoRepositorio repositorio;
     private final CalificacionRepositorio calificacionRepositorio;
+    private final AsignaturaRepositorio asignaturaRepositorio;
 
     public Long getIdAsignaturaRefInst(Set<ReferenteEvaluacion> referentes){
         Iterator<ReferenteEvaluacion> it = referentes.iterator();
@@ -67,6 +69,14 @@ public class InstrumentoServicio {
             return i;
         }
 
+    }
+
+    public void deleteReferenteByIns(Instrumento i, String cod_ref){
+        Optional<ReferenteEvaluacion> rf = asignaturaRepositorio.findByCodAndAsig(i.getAsignatura().getId(), cod_ref);
+        if(rf.isPresent()){
+            i.getReferentes().remove(rf.get());
+            repositorio.save(i);
+        }
     }
 
     public List<Instrumento> findAllInstr(Long idAsig){

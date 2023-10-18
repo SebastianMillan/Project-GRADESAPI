@@ -128,5 +128,18 @@ public class InstrumentoController {
         return ResponseEntity.status(201).body(GetInstrumentoCompleteDto.of(instrumentoServicio.addRefToInst(i.get(), cod_ref), i.get().getAsignatura()));
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "")
+    })
+    @Operation(summary = "deleteReferente de Instrumento", description = "Eliminar un Referente de Evaluación de un Instrumento")
+    @DeleteMapping("/{id}/referente/{cod_ref}")
+    public ResponseEntity<?> deleteRefByIns(@PathVariable Long id, @PathVariable String cod_ref){
+        Optional<Instrumento> i = instrumentoRepositorio.findById(id);
+        if(i.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        instrumentoServicio.deleteReferenteByIns(i.get(), cod_ref);
+        return ResponseEntity.noContent().build();
+    }
 
 }

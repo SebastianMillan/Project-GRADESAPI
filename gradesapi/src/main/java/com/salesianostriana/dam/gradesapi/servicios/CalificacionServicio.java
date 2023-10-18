@@ -6,7 +6,9 @@ import com.salesianostriana.dam.gradesapi.Dto.GetCalificacionShortDto;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
 import com.salesianostriana.dam.gradesapi.modelo.Calificacion;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
+import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
 import com.salesianostriana.dam.gradesapi.repositorios.AlumnoRepositorio;
+import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class CalificacionServicio {
     private final CalificacionRepositorio repositorio;
     private final InstrumentoRepositorio instrumentoRepositorio;
     private final AlumnoRepositorio alumnoRepositorio;
+    private final AsignaturaRepositorio asignaturaRepositorio;
 
     public List<Calificacion> saveToCreate(CreateCalificacionDto nueva){
         List<Calificacion> calificaciones = new ArrayList<>();
@@ -52,5 +55,6 @@ public class CalificacionServicio {
     public List<Calificacion> findCalificacionesByRefAndByAl(String cod_ref, Long idAlumno){
         return repositorio.findCalificacionesByRefAndByAl(cod_ref, idAlumno);
     }
+
 
 }

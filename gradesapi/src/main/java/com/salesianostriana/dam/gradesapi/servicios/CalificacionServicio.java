@@ -52,4 +52,5 @@ public class CalificacionServicio {
     public List<Calificacion> findCalificacionesByRefAndByAl(String cod_ref, Long idAlumno){
         return repositorio.findCalificacionesByRefAndByAl(cod_ref, idAlumno);
     }
+
 }

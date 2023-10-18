@@ -107,10 +107,16 @@ public class AsignaturaController {
 
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
+                    )})
+    })
+    @Operation(summary = "editarDescripcion ReferenteEvaluacion", description = "Editar la descripción del Referente de Evaluación de una Asignatura")
     @PutMapping("/{id}/referente/{cod_ref}")
     public ResponseEntity<GetAsignaturaDetailsDto> editRefOfAsig(@PathVariable Long id, @PathVariable String cod_ref, @RequestBody GetReferenteShortDto textRefEdit){
         Optional<Asignatura> as = asignaturaRepositorio.findById(id);
-        Optional<ReferenteEvaluacion> rf;
         if(as.isEmpty())
             return ResponseEntity.notFound().build();
 

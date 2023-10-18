@@ -61,6 +61,18 @@ public class AlumnoServicio {
         return alumnoRepositorio.save(a);
     }
 
+    public void deleteCalByAsig(Long id_asig, Long id_alum){
+        List<Calificacion> calificaciones = alumnoRepositorio.findCalByAlumAndAsig(id_alum, id_asig);
+        Optional<Alumno> a = alumnoRepositorio.findById(id_alum);
+        Optional<Asignatura> as = asignaturaRepositorio.findById(id_asig);
+        if(a.isPresent() && as.isPresent()){
+            a.get().getAsignaturas().remove(as.get());
+            alumnoRepositorio.save(a.get());
+            calificacionRepositorio.deleteAll(calificaciones);
+        }
+
+    }
+
     public void addAsig(Alumno a, Asignatura as){
         a.getAsignaturas().add(as);
         alumnoRepositorio.save(a);

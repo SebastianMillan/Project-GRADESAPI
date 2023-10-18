@@ -126,4 +126,15 @@ public class AlumnoController {
         alumnoRepositorio.delete(a.get());
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{id}/matricula/{id_asig}")
+    public ResponseEntity<?> deleteMatrAlum(@PathVariable Long id, @PathVariable Long id_asig){
+        Optional<Alumno> a = alumnoRepositorio.findById(id);
+        if(a.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        alumnoServicio.deleteCalByAsig(id, id_asig);
+
+        return ResponseEntity.noContent().build();
+    }
 }

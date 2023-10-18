@@ -1,6 +1,7 @@
 package com.salesianostriana.dam.gradesapi.servicios;
 
 import com.salesianostriana.dam.gradesapi.Dto.CreateInstrumentoDto;
+import com.salesianostriana.dam.gradesapi.Dto.EditInstrumentoDto;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
@@ -40,6 +41,12 @@ public class InstrumentoServicio {
                 .map(repositorio::findRefByCodRef)
                 .collect(Collectors.toSet()));
         return repositorio.save(i);
+    }
+    public Instrumento saveToEdit(EditInstrumentoDto edicion, Instrumento antiguo){
+        antiguo.setFecha(LocalDateTime.parse(edicion.fecha(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        antiguo.setNombre(edicion.nombre());
+        antiguo.setContenidos(edicion.contenidos());
+        return repositorio.save(antiguo);
     }
 
     public List<Instrumento> findAllInstr(Long idAsig){

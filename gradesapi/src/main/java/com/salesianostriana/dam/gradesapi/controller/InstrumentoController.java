@@ -80,5 +80,14 @@ public class InstrumentoController {
         return ResponseEntity.ok(GetInstrumentoCompleteDto.of(i.get(), a.get()));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<GetInstrumentoListDto> editIns(@RequestBody EditInstrumentoDto editado, @PathVariable Long id){
+        Optional<Instrumento> i = instrumentoRepositorio.findById(id);
+        if(i.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(GetInstrumentoListDto.of(instrumentoServicio.saveToEdit(editado, i.get())));
+    }
+
 
 }

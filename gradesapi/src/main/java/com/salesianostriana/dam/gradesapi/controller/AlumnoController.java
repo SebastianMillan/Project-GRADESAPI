@@ -111,4 +111,19 @@ public class AlumnoController {
             return ResponseEntity.status(201).build();
         }
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "")
+    })
+    @Operation(summary = "deleteAlumno", description = "Eliminar Alumno obtenido por ID")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAlum(@PathVariable Long id){
+        Optional<Alumno> a = alumnoRepositorio.findById(id);
+        if(a.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        alumnoServicio.deleteCalToAlum(a.get().getId());
+        alumnoRepositorio.delete(a.get());
+        return ResponseEntity.noContent().build();
+    }
 }

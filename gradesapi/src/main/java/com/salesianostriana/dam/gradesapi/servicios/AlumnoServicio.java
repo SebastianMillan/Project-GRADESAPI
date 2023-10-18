@@ -5,16 +5,16 @@ import com.salesianostriana.dam.gradesapi.Dto.EditAlumnoDto;
 import com.salesianostriana.dam.gradesapi.Dto.GetAlumnoDto;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
+import com.salesianostriana.dam.gradesapi.modelo.Calificacion;
 import com.salesianostriana.dam.gradesapi.repositorios.AlumnoRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
+import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +23,7 @@ public class AlumnoServicio {
 
     private final AlumnoRepositorio alumnoRepositorio;
     private final AsignaturaRepositorio asignaturaRepositorio;
+    private final CalificacionRepositorio calificacionRepositorio;
 
     public Alumno saveToCreate(CreateAlumnoDto nuevo){
         Set<Asignatura> asignaturas = nuevo.asignaturas().stream()
@@ -38,6 +39,11 @@ public class AlumnoServicio {
         a.setAsignaturas(asignaturas);
 
         return alumnoRepositorio.save(a);
+    }
+
+    public void deleteCalToAlum(Long id){
+        List<Calificacion> calificaciones = alumnoRepositorio.findCalByAlum(id);
+        calificacionRepositorio.deleteAll(calificaciones);
     }
     public Alumno saveToEdit(EditAlumnoDto nuevo, Long id){
         Set<Asignatura> asignaturas = new HashSet<>();

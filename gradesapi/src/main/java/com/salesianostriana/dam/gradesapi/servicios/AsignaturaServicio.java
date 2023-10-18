@@ -6,12 +6,14 @@ import com.salesianostriana.dam.gradesapi.Dto.GetReferenteShortDto;
 import com.salesianostriana.dam.gradesapi.modelo.Alumno;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
+import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacionPK;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +55,19 @@ public class AsignaturaServicio {
             ));
         }
         return repositorio.save(a);
+    }
 
+    public Optional<ReferenteEvaluacion> findByCodAndAsig(String cod_ref, Long id){
+        return repositorio.findByCodAndAsig(id, cod_ref);
+    }
+
+    public Asignatura editRefOfAsig(String cod_ref, Asignatura a, GetReferenteShortDto textToEdit){
+        Optional<ReferenteEvaluacion> rf = findByCodAndAsig(cod_ref, a.getId());
+        if(rf.isEmpty()){
+            return a;
+        }else{
+            rf.get().setDescripcion(textToEdit.descripcion());
+            return repositorio.save(a);
+        }
     }
 }

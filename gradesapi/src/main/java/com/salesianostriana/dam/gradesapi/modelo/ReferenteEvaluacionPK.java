@@ -1,5 +1,6 @@
 package com.salesianostriana.dam.gradesapi.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

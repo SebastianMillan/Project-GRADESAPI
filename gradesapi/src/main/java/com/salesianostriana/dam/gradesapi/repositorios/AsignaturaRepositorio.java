@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface AsignaturaRepositorio extends JpaRepository<Asignatura, Long> {
 
-    @Query("SELECT DISTINCT rf FROM ReferenteEvaluacion rf WHERE rf.asignatura.id = ?1 AND rf.codReferente = ?2")
+    @Query("SELECT DISTINCT rf FROM ReferenteEvaluacion rf WHERE rf.asignatura.id = ?1 AND rf.codReferente LIKE ?2")
     Optional<ReferenteEvaluacion> findByCodAndAsig(Long id, String cod_ref);
 
 }

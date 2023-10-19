@@ -13,7 +13,7 @@ public interface InstrumentoRepositorio extends JpaRepository<Instrumento, Long>
     @Query("SELECT rf FROM ReferenteEvaluacion rf WHERE rf.codReferente ILIKE ?1")
     ReferenteEvaluacion findRefByCodRef(String codRef);
 
-    @Query("SELECT DISTINCT i FROM Instrumento i JOIN i.referentes r WHERE r.asignatura.id = ?1")
+    @Query("SELECT i FROM Instrumento i JOIN i.asignatura a WHERE a.id = ?1")
     List<Instrumento> findAllInstByAsig(Long codAsig);
 
     @Query("SELECT DISTINCT a FROM Instrumento i JOIN i.referentes r JOIN r.asignatura a WHERE i.id = ?1")

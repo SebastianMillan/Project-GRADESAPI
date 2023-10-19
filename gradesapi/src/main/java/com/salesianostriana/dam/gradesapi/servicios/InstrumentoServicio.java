@@ -6,6 +6,7 @@ import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacionPK;
+import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +24,7 @@ public class InstrumentoServicio {
 
     private final InstrumentoRepositorio repositorio;
     private final CalificacionRepositorio calificacionRepositorio;
+    private final AsignaturaRepositorio asignaturaRepositorio;
 
     public Long getIdAsignaturaRefInst(Set<ReferenteEvaluacion> referentes){
         Iterator<ReferenteEvaluacion> it = referentes.iterator();
@@ -67,6 +66,14 @@ public class InstrumentoServicio {
             return i;
         }
 
+    }
+
+    public void deleteReferenteByIns(Instrumento i, String cod_ref){
+        Optional<ReferenteEvaluacion> rf = i.getReferentes().stream().filter(refe -> refe.getCodReferente().equalsIgnoreCase(cod_ref)).findAny();
+        if(rf.isPresent()){
+            i.getReferentes().removeIf(refe -> refe.getCodReferente().equalsIgnoreCase(rf.get().getCodReferente()));
+            repositorio.save(i);
+        }
     }
 
     public List<Instrumento> findAllInstr(Long idAsig){

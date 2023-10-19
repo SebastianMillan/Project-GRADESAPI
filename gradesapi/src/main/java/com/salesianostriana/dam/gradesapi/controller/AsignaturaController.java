@@ -132,4 +132,18 @@ public class AsignaturaController {
 
 
     }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Asignatura eliminada con exito"),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada")
+    })
+    @Operation(summary = "deleteMatricula de Alumno", description = "Eliminar Asignatura")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAsig(@PathVariable Long id){
+        if(!asignaturaRepositorio.existsById(id))
+            return ResponseEntity.notFound().build();
+
+        asignaturaServicio.deleteAsig(id);
+        return ResponseEntity.noContent().build();
+    }
 }

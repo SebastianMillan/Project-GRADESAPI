@@ -13,6 +13,7 @@ import com.salesianostriana.dam.gradesapi.servicios.InstrumentoServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -33,14 +34,35 @@ public class CalificacionController {
     private final CalificacionServicio calificacionServicio;
     private final InstrumentoRepositorio instrumentoRepositorio;
     private final CalificacionRepositorio calificacionRepositorio;
-    private final InstrumentoServicio instrumentoServicio;
     private final AsignaturaRepositorio asignaturaRepositorio;
     private final AlumnoServicio alumnoServicio;
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Añadir Calificación con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetCalificacionListDto.class))
+                            array = @ArraySchema(schema = @Schema(implementation = GetCalificacionListDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "idInstrumento": 1,
+                                                "nombre": "Examen Tema 3",
+                                                "calificaciones": [
+                                                    {
+                                                        "id": 13,
+                                                        "codReferente": "RA02.a",
+                                                        "nombre": "Se diseñan y utilizan las clases necesarias para producir o consumir información en formato JSON o XML",
+                                                        "calificacion": 4.0
+                                                    },
+                                                    {
+                                                        "id": 14,
+                                                        "codReferente": "RA01.a",
+                                                        "nombre": "Integra correctamente el código fuente de los ejemplos.",
+                                                        "calificacion": 8.0
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
                     )}),
             @ApiResponse(responseCode = "400", description = "Calificaciones no encontradas", content = @Content)
     })
@@ -49,7 +71,7 @@ public class CalificacionController {
     public ResponseEntity<?> addCalificaciones(@RequestBody CreateCalificacionDto nueva){
         List<Calificacion> calificaciones = calificacionServicio.saveToCreate(nueva);
         if(calificaciones.isEmpty()){
-            return ResponseEntity.status(400).body((new MensajeError("No se puede crear la calificación." +
+            return ResponseEntity.badRequest().body((new MensajeError("No se puede crear la calificación." +
                     " Compruebe que los datos del instrumento y los referentes son correctos")));
         }
 
@@ -59,7 +81,61 @@ public class CalificacionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Obtención de la Lista de Calificaciones de un Instrumento realizada con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetCalificacionPorInstrumentoDto.class))
+                            array = @ArraySchema(schema = @Schema(implementation = GetCalificacionPorInstrumentoDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "idInstrumento": 2,
+                                                "nombre": "Examen Tema 5",
+                                                "alumnos": [
+                                                    {
+                                                        "id": 3,
+                                                        "nombre": "Pepe",
+                                                        "apellidos": "Sánchez",
+                                                        "calificaciones": [
+                                                            {
+                                                                "codReferente": "RA01.a",
+                                                                "nombre": "Integra correctamente el código fuente de los ejemplos.",
+                                                                "calificacion": 5.0
+                                                            },
+                                                            {
+                                                                "codReferente": "RA02.a",
+                                                                "nombre": "Se diseñan y utilizan las clases necesarias para producir o consumir información en formato JSON o XML",
+                                                                "calificacion": 7.0
+                                                            },
+                                                            {
+                                                                "codReferente": "RA03.a",
+                                                                "nombre": "Se ha documentado correctamente la API REST",
+                                                                "calificacion": 9.5
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 1,
+                                                        "nombre": "Sebastián",
+                                                        "apellidos": "Millán Ordóñez",
+                                                        "calificaciones": [
+                                                            {
+                                                                "codReferente": "RA01.a",
+                                                                "nombre": "Integra correctamente el código fuente de los ejemplos.",
+                                                                "calificacion": 6.0
+                                                            },
+                                                            {
+                                                                "codReferente": "RA02.a",
+                                                                "nombre": "Se diseñan y utilizan las clases necesarias para producir o consumir información en formato JSON o XML",
+                                                                "calificacion": 3.5
+                                                            },
+                                                            {
+                                                                "codReferente": "RA03.a",
+                                                                "nombre": "Se ha documentado correctamente la API REST",
+                                                                "calificacion": 6.9
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
                     )}),
             @ApiResponse(responseCode = "404", description = "Instrumento no encontrado", content = @Content)
     })
@@ -85,7 +161,55 @@ public class CalificacionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Obtención de la Lista de Calificaciones de una Asignatura realizada con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetCalificacionPorAsigDto.class))
+                            array = @ArraySchema(schema = @Schema(implementation = GetCalificacionPorAsigDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "idAsignatura": 1,
+                                                "codReferente": "RA02.a",
+                                                "alumnos": [
+                                                    {
+                                                        "id": 1,
+                                                        "nombre": "Sebastián",
+                                                        "apellidos": "Millán Ordóñez",
+                                                        "calificaciones": [
+                                                            {
+                                                                "idInstrumento": 3,
+                                                                "calificacion": 6.0
+                                                            },
+                                                            {
+                                                                "idInstrumento": 2,
+                                                                "calificacion": 3.5
+                                                            },
+                                                            {
+                                                                "idInstrumento": 1,
+                                                                "calificacion": 4.0
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 3,
+                                                        "nombre": "Pepe",
+                                                        "apellidos": "Sánchez",
+                                                        "calificaciones": [
+                                                            {
+                                                                "idInstrumento": 3,
+                                                                "calificacion": 6.0
+                                                            },
+                                                            {
+                                                                "idInstrumento": 2,
+                                                                "calificacion": 3.5
+                                                            },
+                                                            {
+                                                                "idInstrumento": 1,
+                                                                "calificacion": 4.0
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
                     )}),
             @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
             @ApiResponse(responseCode = "404", description = "Referentes de Evaluación de la Asignatura no encontrados", content = @Content),

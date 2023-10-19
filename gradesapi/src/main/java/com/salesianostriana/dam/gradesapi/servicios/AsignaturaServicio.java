@@ -84,7 +84,7 @@ public class AsignaturaServicio {
         instrumentos.forEach(i -> i.getReferentes().clear());
         instrumentoRepositorio.deleteAll(instrumentos);
         a.get().getReferentes().clear();
-        repositorio.delete(a.get());
+        //repositorio.delete(a.get());
 
     }
 }

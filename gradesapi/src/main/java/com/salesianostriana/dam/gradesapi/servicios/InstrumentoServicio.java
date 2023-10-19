@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -72,9 +69,9 @@ public class InstrumentoServicio {
     }
 
     public void deleteReferenteByIns(Instrumento i, String cod_ref){
-        Optional<ReferenteEvaluacion> rf = asignaturaRepositorio.findByCodAndAsig(i.getAsignatura().getId(), cod_ref);
+        Optional<ReferenteEvaluacion> rf = i.getReferentes().stream().filter(refe -> refe.getCodReferente().equalsIgnoreCase(cod_ref)).findAny();
         if(rf.isPresent()){
-            i.getReferentes().remove(rf.get());
+            i.getReferentes().removeIf(refe -> refe.getCodReferente().equalsIgnoreCase(rf.get().getCodReferente()));
             repositorio.save(i);
         }
     }

@@ -129,7 +129,8 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "")
+            @ApiResponse(responseCode = "204", description = "Referente eliminado del Instrumento con exito"),
+            @ApiResponse(responseCode = "404", description = "Intrumento no encontrado")
     })
     @Operation(summary = "deleteReferente de Instrumento", description = "Eliminar un Referente de Evaluación de un Instrumento")
     @DeleteMapping("/{id}/referente/{cod_ref}")

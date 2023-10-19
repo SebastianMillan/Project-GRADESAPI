@@ -127,6 +127,11 @@ public class AlumnoController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Matrícula eliminada del Alumno con exito"),
+            @ApiResponse(responseCode = "404", description = "Alumno no encontrado")
+    })
+    @Operation(summary = "deleteMatricula de Alumno", description = "Eliminar matricula de una Asignatura de un Alumno")
     @DeleteMapping("/{id}/matricula/{id_asig}")
     public ResponseEntity<?> deleteMatrAlum(@PathVariable Long id, @PathVariable Long id_asig){
         Optional<Alumno> a = alumnoRepositorio.findById(id);

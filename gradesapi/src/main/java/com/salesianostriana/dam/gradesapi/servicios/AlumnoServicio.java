@@ -64,11 +64,11 @@ public class AlumnoServicio {
     public void deleteCalByAsig(Long id_asig, Long id_alum){
         List<Calificacion> calificaciones = alumnoRepositorio.findCalByAlumAndAsig(id_alum, id_asig);
         Optional<Alumno> a = alumnoRepositorio.findById(id_alum);
-        Optional<Asignatura> as = asignaturaRepositorio.findById(id_asig);
-        if(a.isPresent() && as.isPresent()){
-            a.get().getAsignaturas().remove(as.get());
-            alumnoRepositorio.save(a.get());
+        if(a.isPresent() &&asignaturaRepositorio.existsById(id_asig)){
+            Alumno alum = a.get();
+            alum.getAsignaturas().removeIf(asignatura -> Objects.equals(asignatura.getId(), id_asig));
             calificacionRepositorio.deleteAll(calificaciones);
+            alumnoRepositorio.save(alum);
         }
 
     }

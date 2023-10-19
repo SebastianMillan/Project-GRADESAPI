@@ -3,16 +3,16 @@ package com.salesianostriana.dam.gradesapi.servicios;
 import com.salesianostriana.dam.gradesapi.Dto.CreateAsignaturaDto;
 import com.salesianostriana.dam.gradesapi.Dto.GetAsignaturaDto;
 import com.salesianostriana.dam.gradesapi.Dto.GetReferenteShortDto;
-import com.salesianostriana.dam.gradesapi.modelo.Alumno;
-import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
-import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
-import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacionPK;
+import com.salesianostriana.dam.gradesapi.modelo.*;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
+import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
+import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -20,6 +20,9 @@ import java.util.Optional;
 public class AsignaturaServicio {
 
     private final AsignaturaRepositorio repositorio;
+    private final InstrumentoServicio instrumentoServicio;
+    private final InstrumentoRepositorio instrumentoRepositorio;
+    private final CalificacionRepositorio calificacionRepositorio;
 
     public Asignatura saveToCreate(CreateAsignaturaDto nuevo){
         List<ReferenteEvaluacion> referentes = new ArrayList<>();
@@ -69,5 +72,16 @@ public class AsignaturaServicio {
             rf.get().setDescripcion(textToEdit.descripcion());
             return repositorio.save(a);
         }
+    }
+
+    public void deleteAsig(Long id){
+
+        Optional<Asignatura> a =repositorio.findById(id);
+        a.get().getReferentes().removeIf(rf -> Objects.equals(rf.getAsignatura().getId(), a.get().getId()));
+        calificacionRepositorio.deleteAll(calificacionRepositorio.findAllCalifByAsg(id));
+        instrumentoRepositorio.deleteAll(instrumentoRepositorio.findAllInstByAsig(id));
+        repositorio.save(a.get());
+        repositorio.delete(a.get());
+
     }
 }

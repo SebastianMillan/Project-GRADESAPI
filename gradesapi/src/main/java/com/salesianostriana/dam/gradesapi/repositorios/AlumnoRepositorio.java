@@ -17,4 +17,7 @@ public interface AlumnoRepositorio extends JpaRepository<Alumno, Long> {
 
     @Query("SELECT c FROM Calificacion c WHERE c.alumno.id = ?1")
     List<Calificacion> findCalByAlum(Long id);
+
+    @Query("SELECT c FROM Calificacion c WHERE c.alumno.id = ?1 AND c.referente.asignatura.id = ?2")
+    List<Calificacion> findCalByAlumAndAsig(Long idAlum, Long idAsig);
 }

@@ -10,6 +10,7 @@ import com.salesianostriana.dam.gradesapi.servicios.InstrumentoServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -33,10 +34,32 @@ public class InstrumentoController {
     private final AsignaturaRepositorio asignaturaRepositorio;
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "Creación del Instrumento con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoDetailsDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoDetailsDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 4,
+                                                "fecha": "20/01/2024",
+                                                "nombre": "Test",
+                                                "contenidos": "Muchos",
+                                                "idAsignatura": 1,
+                                                "referentes": [
+                                                    {
+                                                        "codReferente": "RA02.a",
+                                                        "descripcion": "Se diseñan y utilizan las clases necesarias para producir o consumir información en formato JSON o XML"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA01.a",
+                                                        "descripcion": "Integra correctamente el código fuente de los ejemplos."
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "400", description = "Error en los datos", content = @Content)
     })
     @Operation(summary = "create Instrumento", description = "Creación de una Instrumento de Evaluación")
     @PostMapping("/")
@@ -46,10 +69,32 @@ public class InstrumentoController {
 
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Listado de los Instrumentos creado con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoListDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoListDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                {
+                                                    "id": 1,
+                                                    "fecha": "Examen Tema 3",
+                                                    "nombre": "20/03/2024 12:30",
+                                                    "contenidos": "Creación de tablas y consultas",
+                                                    "numeroReferentes": 2
+                                                },
+                                                {
+                                                    "id": 3,
+                                                    "fecha": "Test",
+                                                    "nombre": "24/12/2023 13:30",
+                                                    "contenidos": "Clases CRUD",
+                                                    "numeroReferentes": 1
+                                                }
+                                            ]
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Lista de Instrumentos vacia", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content)
     })
     @Operation(summary = "findAll Instrumentos", description = "Obtener todos los Instrumentos de una Asignatura")
     @GetMapping("/{id_asig}")
@@ -66,10 +111,40 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Listado detallado del Instrumento creado con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoCompleteDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoCompleteDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 2,
+                                                "fecha": "10/02/2024",
+                                                "nombre": "Examen Tema 5",
+                                                "contenidos": "Creación de Clases y métodos",
+                                                "asignatura": {
+                                                    "id": 1,
+                                                    "nombre": "Programación"
+                                                },
+                                                "referentes": [
+                                                    {
+                                                        "codReferente": "RA03.a",
+                                                        "descripcion": "Se ha documentado correctamente la API REST"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA02.a",
+                                                        "descripcion": "Se diseñan y utilizan las clases necesarias para producir o consumir información en formato JSON o XML"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA01.a",
+                                                        "descripcion": "Integra correctamente el código fuente de los ejemplos."
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encotnrado", content = @Content)
     })
     @Operation(summary = "findById Instrumentos", description = "Obtener el detalle de un instrumento por su ID")
     @GetMapping("/detalle/{id}")
@@ -83,10 +158,22 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Instrumento editado con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoListDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoListDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                 "id": 1,
+                                                 "fecha": "Examen T10",
+                                                 "nombre": "10/02/2024 12:00",
+                                                 "contenidos": "Creación proyecto Angular",
+                                                 "numeroReferentes": 2
+                                             }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encontrado", content = @Content)
     })
     @Operation(summary = "edit Instrumentos", description = "Editar un Instrumento por su ID")
     @PutMapping("/{id}")
@@ -99,7 +186,8 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "")
+            @ApiResponse(responseCode = "204", description = "Instrumento eliminado con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encontrado", content = @Content)
     })
     @Operation(summary = "deleteInstrumento", description = "Eliminar un Instrumento por su ID")
     @DeleteMapping("/{id}")
@@ -113,10 +201,39 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "El Referente de Evaluación se ha añadido con exito al Instrumento", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoCompleteDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoCompleteDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 1,
+                                                "fecha": "10/02/2024",
+                                                "nombre": "Examen T10",
+                                                "contenidos": "Creación proyecto Angular",
+                                                "asignatura": {
+                                                    "id": 1,
+                                                    "nombre": "Programación"
+                                                },
+                                                "referentes": [
+                                                    {
+                                                        "codReferente": "RA02.b",
+                                                        "descripcion": "Desarrolla servicios web sencillos utilizando la arquitectura REST"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA01.b",
+                                                        "descripcion": "Se han utilizado las diferentes clases y anotaciones "
+                                                    },
+                                                    {
+                                                        "codReferente": "RA01.a",
+                                                        "descripcion": "Integra correctamente el código fuente de los ejemplos."
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Instrumento no encontrado", content = @Content)
     })
     @Operation(summary = "addReferenteToInstrumento", description = "Añadir un Referente de Evaluación a un Instrumento")
     @PostMapping("/{id}/referente/{cod_ref}")
@@ -129,8 +246,8 @@ public class InstrumentoController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Referente eliminado del Instrumento con exito"),
-            @ApiResponse(responseCode = "404", description = "Intrumento no encontrado")
+            @ApiResponse(responseCode = "204", description = "Referente eliminado del Instrumento con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Intrumento no encontrado", content = @Content)
     })
     @Operation(summary = "deleteReferente de Instrumento", description = "Eliminar un Referente de Evaluación de un Instrumento")
     @DeleteMapping("/{id}/referente/{cod_ref}")

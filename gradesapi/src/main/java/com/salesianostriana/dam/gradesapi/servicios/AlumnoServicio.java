@@ -26,17 +26,15 @@ public class AlumnoServicio {
     private final CalificacionRepositorio calificacionRepositorio;
 
     public Alumno saveToCreate(CreateAlumnoDto nuevo){
-        Set<Asignatura> asignaturas = nuevo.asignaturas().stream()
-                .map(asignaturaRepositorio::getReferenceById)
-                .collect(Collectors.toSet());
-
         Alumno a = new Alumno();
         a.setApellidos(nuevo.apellidos());
         a.setEmail(nuevo.email());
         a.setNombre(nuevo.nombre());
         a.setFechaNacimiento(LocalDate.parse(nuevo.fechaNacimiento(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         a.setTelefono(nuevo.telefono());
-        a.setAsignaturas(asignaturas);
+        a.setAsignaturas(nuevo.asignaturas().stream()
+                .map(asignaturaRepositorio::getReferenceById)
+                .collect(Collectors.toSet()));
 
         return alumnoRepositorio.save(a);
     }

@@ -8,6 +8,7 @@ import com.salesianostriana.dam.gradesapi.servicios.AsignaturaServicio;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -30,9 +31,19 @@ public class AsignaturaController {
     private final AsignaturaServicio asignaturaServicio;
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "Creación de una Asignatura con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDto.class))
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 3,
+                                                "nombre": "Programación",
+                                                "horas": 25,
+                                                "descripcion": "Creación de páginas web"
+                                            }
+                                            """
+                            )}
                     )})
     })
     @Operation(summary = "create Alumno", description = "Creación de una asignatura")
@@ -42,10 +53,31 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Obtención de la Lista de Asignaturas realizada con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaListDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaListDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                 {
+                                                     "id": 1,
+                                                     "nombre": "Programación",
+                                                     "horas": 25,
+                                                     "descripcion": "Creación de páginas web",
+                                                     "numReferentes": 3
+                                                 },
+                                                 {
+                                                     "id": 2,
+                                                     "nombre": "Base de Datos",
+                                                     "horas": 32,
+                                                     "descripcion": "Administrar datos",
+                                                     "numReferentes": 2
+                                                 }
+                                             ]
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Lista de Asignaturas no encontrada", content = @Content),
     })
     @Operation(summary = "findAll Asignatura", description = "Obtener todos los alumnos")
     @GetMapping("/")
@@ -62,10 +94,35 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Conseguir Asignatura con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 1,
+                                                "nombre": "Programación",
+                                                "horas": 25,
+                                                "descripcion": "Creación de páginas web",
+                                                "referentes": [
+                                                    {
+                                                        "codReferente": "RA01.a",
+                                                        "descripcion": "Integra correctamente el código fuente de los ejemplos."
+                                                    },
+                                                    {
+                                                        "codReferente": "RA02.a",
+                                                        "descripcion": "Se diseñan y utilizan las clases necesarias para producir o consumir información en formato JSON o XML"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA03.a",
+                                                        "descripcion": "Se ha documentado correctamente la API REST"
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
     })
     @Operation(summary = "findById Asignatura", description = "Obtener una asignatura por su ID")
     @GetMapping("/{id}")
@@ -75,10 +132,52 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "", content = {
+            @ApiResponse(responseCode = "201", description = "Crear Referentes de Evaluación para una Asignatura realizado con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 1,
+                                                "nombre": "Programación",
+                                                "horas": 25,
+                                                "descripcion": "Creación de páginas web",
+                                                "referentes": [
+                                                    {
+                                                        "codReferente": "RA01.a",
+                                                        "descripcion": "Integra correctamente el código fuente de los ejemplos."
+                                                    },
+                                                    {
+                                                        "codReferente": "RA02.a",
+                                                        "descripcion": "Se diseñan y utilizan las clases necesarias para producir o consumir información en formato JSON o XML"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA03.a",
+                                                        "descripcion": "Se ha documentado correctamente la API REST"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA01.Progr.3.077102667294083",
+                                                        "descripcion": "El alumno sabe hacer la O con un canuto"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA01.Progr.2.5693772294779427",
+                                                        "descripcion": "Elasdasdcanuto"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA01.Progr.5.267801037275929",
+                                                        "descripcion": "El alumno sabeasdasdasd con un canuto"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA01.Progr.4.084958812368009",
+                                                        "descripcion": "El alumsssscon un canuto"
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
+
     })
     @Operation(summary = "addReferenteEvaluacionToAsignatura", description = "Añadir uno o varios Referentes de Evaluación a una Asignatura")
     @PostMapping("/{id}/referente")
@@ -91,10 +190,23 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Edición de la Asignatura realizada con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaListDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaListDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 2,
+                                                "nombre": "AD-PSP",
+                                                "horas": 55,
+                                                "descripcion": "Creación DTOs",
+                                                "numReferentes": 2
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Datos introducidos erroneos", content = @Content)
     })
     @Operation(summary = "editarAsignatura", description = "Editar una Asignatura")
     @PutMapping("/{id}")
@@ -108,10 +220,35 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "", content = {
+            @ApiResponse(responseCode = "200", description = "Edición del Referente de Evaluación de la Asignatura realizado con exito", content = {
                     @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
-                    )})
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 1,
+                                                "nombre": "Programación",
+                                                "horas": 25,
+                                                "descripcion": "Creación de páginas web",
+                                                "referentes": [
+                                                    {
+                                                        "codReferente": "RA01.a",
+                                                        "descripcion": "Integra correctamente el código fuente de los ejemplos."
+                                                    },
+                                                    {
+                                                        "codReferente": "RA02.a",
+                                                        "descripcion": "Se diseñan y utilizan las clases necesarias para producir o consumir información en formato JSON o XML"
+                                                    },
+                                                    {
+                                                        "codReferente": "RA03.a",
+                                                        "descripcion": "Se ha documentado correctamente la API REST"
+                                                    }
+                                                ]
+                                            }
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content)
     })
     @Operation(summary = "editarDescripcion ReferenteEvaluacion", description = "Editar la descripción del Referente de Evaluación de una Asignatura")
     @PutMapping("/{id}/referente/{cod_ref}")
@@ -126,8 +263,8 @@ public class AsignaturaController {
     }
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Asignatura eliminada con exito"),
-            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada")
+            @ApiResponse(responseCode = "204", description = "Asignatura eliminada con exito", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Asignatura no encontrada", content = @Content)
     })
     @Operation(summary = "deleteMatricula de Alumno", description = "Eliminar Asignatura")
     @DeleteMapping("/{id}")

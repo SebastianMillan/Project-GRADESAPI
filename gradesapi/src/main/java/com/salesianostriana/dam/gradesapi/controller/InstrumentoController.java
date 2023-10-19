@@ -3,6 +3,7 @@ package com.salesianostriana.dam.gradesapi.controller;
 import com.salesianostriana.dam.gradesapi.Dto.*;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
+import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import com.salesianostriana.dam.gradesapi.servicios.InstrumentoServicio;
@@ -17,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,6 +80,52 @@ public class InstrumentoController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(GetInstrumentoCompleteDto.of(i.get(), a.get()));
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoListDto.class))
+                    )})
+    })
+    @Operation(summary = "edit Instrumentos", description = "Editar un Instrumento por su ID")
+    @PutMapping("/{id}")
+    public ResponseEntity<GetInstrumentoListDto> editIns(@RequestBody EditInstrumentoDto editado, @PathVariable Long id){
+        Optional<Instrumento> i = instrumentoRepositorio.findById(id);
+        if(i.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(GetInstrumentoListDto.of(instrumentoServicio.saveToEdit(editado, i.get())));
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "")
+    })
+    @Operation(summary = "deleteInstrumento", description = "Eliminar un Instrumento por su ID")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteIns(@PathVariable Long id){
+        Optional<Instrumento> i = instrumentoRepositorio.findById(id);
+        if(i.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        instrumentoServicio.deleteIns(i.get());
+        return ResponseEntity.noContent().build();
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetInstrumentoCompleteDto.class))
+                    )})
+    })
+    @Operation(summary = "addReferenteToInstrumento", description = "Añadir un Referente de Evaluación a un Instrumento")
+    @PostMapping("/{id}/referente/{cod_ref}")
+    public ResponseEntity<GetInstrumentoCompleteDto> addRefToIns(@PathVariable Long id, @PathVariable String cod_ref){
+        Optional<Instrumento> i = instrumentoRepositorio.findById(id);
+        if(i.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.status(201).body(GetInstrumentoCompleteDto.of(instrumentoServicio.addRefToInst(i.get(), cod_ref), i.get().getAsignatura()));
     }
 
 

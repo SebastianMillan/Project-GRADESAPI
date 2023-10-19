@@ -2,6 +2,7 @@ package com.salesianostriana.dam.gradesapi.controller;
 
 import com.salesianostriana.dam.gradesapi.Dto.*;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
+import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
 import com.salesianostriana.dam.gradesapi.repositorios.AsignaturaRepositorio;
 import com.salesianostriana.dam.gradesapi.servicios.AsignaturaServicio;
 import io.swagger.v3.oas.annotations.Operation;
@@ -103,6 +104,24 @@ public class AsignaturaController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(GetAsignaturaListDto.of(asignaturaServicio.saveToEdit(editado, id)));
+
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "", content = {
+                    @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetAsignaturaDetailsDto.class))
+                    )})
+    })
+    @Operation(summary = "editarDescripcion ReferenteEvaluacion", description = "Editar la descripción del Referente de Evaluación de una Asignatura")
+    @PutMapping("/{id}/referente/{cod_ref}")
+    public ResponseEntity<GetAsignaturaDetailsDto> editRefOfAsig(@PathVariable Long id, @PathVariable String cod_ref, @RequestBody GetReferenteShortDto textRefEdit){
+        Optional<Asignatura> as = asignaturaRepositorio.findById(id);
+        if(as.isEmpty())
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(GetAsignaturaDetailsDto.of(asignaturaServicio.editRefOfAsig(cod_ref, as.get(), textRefEdit)));
+
 
     }
 }

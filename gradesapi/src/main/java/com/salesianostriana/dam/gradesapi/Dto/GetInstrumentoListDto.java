@@ -11,7 +11,7 @@ public record GetInstrumentoListDto(Long id, String fecha, String nombre, String
         return new GetInstrumentoListDto(
                 i.getId(),
                 i.getNombre(),
-                i.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                i.getFecha().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
                 i.getContenidos(),
                 i.getReferentes().size()
         );

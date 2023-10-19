@@ -1,9 +1,12 @@
 package com.salesianostriana.dam.gradesapi.servicios;
 
 import com.salesianostriana.dam.gradesapi.Dto.CreateInstrumentoDto;
+import com.salesianostriana.dam.gradesapi.Dto.EditInstrumentoDto;
 import com.salesianostriana.dam.gradesapi.modelo.Asignatura;
 import com.salesianostriana.dam.gradesapi.modelo.Instrumento;
 import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacion;
+import com.salesianostriana.dam.gradesapi.modelo.ReferenteEvaluacionPK;
+import com.salesianostriana.dam.gradesapi.repositorios.CalificacionRepositorio;
 import com.salesianostriana.dam.gradesapi.repositorios.InstrumentoRepositorio;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 public class InstrumentoServicio {
 
     private final InstrumentoRepositorio repositorio;
+    private final CalificacionRepositorio calificacionRepositorio;
 
     public Long getIdAsignaturaRefInst(Set<ReferenteEvaluacion> referentes){
         Iterator<ReferenteEvaluacion> it = referentes.iterator();
@@ -40,6 +44,29 @@ public class InstrumentoServicio {
                 .map(repositorio::findRefByCodRef)
                 .collect(Collectors.toSet()));
         return repositorio.save(i);
+    }
+    public Instrumento saveToEdit(EditInstrumentoDto edicion, Instrumento antiguo){
+        antiguo.setFecha(LocalDateTime.parse(edicion.fecha(), DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")));
+        antiguo.setNombre(edicion.nombre());
+        antiguo.setContenidos(edicion.contenidos());
+        return repositorio.save(antiguo);
+    }
+    public void deleteIns(Instrumento i){
+        calificacionRepositorio.deleteAll(calificacionRepositorio.findAllCalifByIns(i.getId()));
+        repositorio.delete(i);
+    }
+    public Instrumento addRefToInst(Instrumento i, String cod_ref){
+        ReferenteEvaluacion rf = findRefByCodRef(cod_ref);
+        if(rf!=null){
+            if(!i.getReferentes().contains(rf)){
+                i.getReferentes().add(rf);
+                return repositorio.save(i);
+            }
+            return repositorio.save(i);
+        }else{
+            return i;
+        }
+
     }
 
     public List<Instrumento> findAllInstr(Long idAsig){

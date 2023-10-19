@@ -75,12 +75,15 @@ public class AsignaturaServicio {
     }
 
     public void deleteAsig(Long id){
-
+        List<Calificacion> calificaciones =calificacionRepositorio.findAllCalifByAsg(id);
+        List<Instrumento> instrumentos=instrumentoRepositorio.findAllInstByAsig(id);
         Optional<Asignatura> a =repositorio.findById(id);
-        a.get().getReferentes().removeIf(rf -> Objects.equals(rf.getAsignatura().getId(), a.get().getId()));
-        calificacionRepositorio.deleteAll(calificacionRepositorio.findAllCalifByAsg(id));
-        instrumentoRepositorio.deleteAll(instrumentoRepositorio.findAllInstByAsig(id));
-        repositorio.save(a.get());
+        
+        calificaciones.forEach(c -> c.setReferente(null));
+        calificacionRepositorio.deleteAll(calificaciones);
+        instrumentos.forEach(i -> i.getReferentes().clear());
+        instrumentoRepositorio.deleteAll(instrumentos);
+        a.get().getReferentes().clear();
         repositorio.delete(a.get());
 
     }

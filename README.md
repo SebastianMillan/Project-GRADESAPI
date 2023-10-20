@@ -1,4 +1,6 @@
 # GRADESAPP API-REST
+![gradesapi_img](https://github.com/SebastianMillan/Project-GRADESAPI/assets/114216417/7536c52d-d817-43e8-8c6c-5eb32e005702)
+
 El proyecto consiste en la implementación de una API REST que permita gestionar información sobre las calificaciones de alumnos en instrumentos de evaluación (exámenes, ejercicios, proyectos) de diversas asignaturas
 
 ### Alumno
@@ -42,10 +44,8 @@ El proyecto consiste en la implementación de una API REST que permita gestionar
 
 | Método     | Ruta                               | Acción                                                  |
 |------------|-----------------------------------|---------------------------------------------------------|
-| `POST`     | /alumno/                        | createAlumno |
-| `GET`     | /alumno/                        | getAllAlumno |
-| `GET`     | /alumno/id                        | getByIdAlumno |
-| `PUT`     | /alumno/id                       | editAlumno |
-| `POST`     | /alumno/id/matricula/id_asig                        | addAsignaturaToAlumno |
-| `DELETE`     | /alumno/id/                       | removeAlumno |
-| `DELETE`     | /alumno/id/matricula/id_asig                        | removeAsignaturaToAlumno |
+| `POST`     | /calificacion/                        | addCalificaciones |
+| `GET`     | /calificacion/instrumento/id                        | getAllCalificacionesToInstrumento |
+| `GET`     | /calificacion/referente/id_a/cod_ref                        | getAllCalificacionsToAlumno |
+| `PUT`     | /calificacion/id                       | deleteCalificacion |
+

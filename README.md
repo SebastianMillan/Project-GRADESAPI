@@ -53,5 +53,5 @@ mvn spring-boot:run
 | `POST`     | /calificacion/                        | addCalificaciones |
 | `GET`     | /calificacion/instrumento/id                        | getAllCalificacionesToInstrumento |
 | `GET`     | /calificacion/referente/id_a/cod_ref                        | getAllCalificacionsToAlumno |
-| `PUT`     | /calificacion/id                       | deleteCalificacion |
+| `DELETE`     | /calificacion/id                       | deleteCalificacion |
 

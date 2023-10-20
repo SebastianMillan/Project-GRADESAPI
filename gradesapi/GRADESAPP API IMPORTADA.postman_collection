@@ -1,0 +1,2916 @@
+{
+	"info": {
+		"_postman_id": "9aca1199-b83d-4c0b-bed4-a60bb791450d",
+		"name": "GRADESAPP API",
+		"description": "API REST para gestionar las notas del alumnado",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30052645"
+	},
+	"item": [
+		{
+			"name": "instrumento",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "referente",
+							"item": [
+								{
+									"name": "{cod_ref}",
+									"item": [
+										{
+											"name": "addReferenteToInstrumento",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/instrumento/:id/referente/:cod_ref",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"instrumento",
+														":id",
+														"referente",
+														":cod_ref"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														},
+														{
+															"key": "cod_ref",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Añadir un Referente de Evaluación a un Instrumento"
+											},
+											"response": [
+												{
+													"name": "El Referente de Evaluación se ha añadido con exito al Instrumento",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/instrumento/:id/referente/:cod_ref",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"instrumento",
+																":id",
+																"referente",
+																":cod_ref"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "cod_ref"
+																}
+															]
+														}
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"asignatura\": {\n      \"id\": \"<long>\",\n      \"nombre\": \"<string>\"\n    },\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"asignatura\": {\n      \"id\": \"<long>\",\n      \"nombre\": \"<string>\"\n    },\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  }\n]"
+												},
+												{
+													"name": "Instrumento no encontrado",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/instrumento/:id/referente/:cod_ref",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"instrumento",
+																":id",
+																"referente",
+																":cod_ref"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "cod_ref"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										},
+										{
+											"name": "deleteReferente de Instrumento",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/instrumento/:id/referente/:cod_ref",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"instrumento",
+														":id",
+														"referente",
+														":cod_ref"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														},
+														{
+															"key": "cod_ref",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Eliminar un Referente de Evaluación de un Instrumento"
+											},
+											"response": [
+												{
+													"name": "Referente eliminado del Instrumento con exito",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/instrumento/:id/referente/:cod_ref",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"instrumento",
+																":id",
+																"referente",
+																":cod_ref"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "cod_ref"
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Intrumento no encontrado",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/instrumento/:id/referente/:cod_ref",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"instrumento",
+																":id",
+																"referente",
+																":cod_ref"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "cod_ref"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "edit Instrumentos",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fecha\": \"<string>\",\n  \"nombre\": \"<string>\",\n  \"contenidos\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/instrumento/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"instrumento",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Editar un Instrumento por su ID"
+							},
+							"response": [
+								{
+									"name": "Instrumento editado con exito",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"fecha\": \"<string>\",\n  \"nombre\": \"<string>\",\n  \"contenidos\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/instrumento/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"instrumento",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"numeroReferentes\": \"<integer>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"numeroReferentes\": \"<integer>\"\n  }\n]"
+								},
+								{
+									"name": "Instrumento no encontrado",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"fecha\": \"<string>\",\n  \"nombre\": \"<string>\",\n  \"contenidos\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/instrumento/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"instrumento",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "deleteInstrumento",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/instrumento/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"instrumento",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Eliminar un Instrumento por su ID"
+							},
+							"response": [
+								{
+									"name": "Instrumento eliminado con exito",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/instrumento/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"instrumento",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Instrumento no encontrado",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/instrumento/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"instrumento",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "{id_asig}",
+					"item": [
+						{
+							"name": "findAll Instrumentos",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/instrumento/:id_asig",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"instrumento",
+										":id_asig"
+									],
+									"variable": [
+										{
+											"key": "id_asig",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Obtener todos los Instrumentos de una Asignatura"
+							},
+							"response": [
+								{
+									"name": "Listado de los Instrumentos creado con exito",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/instrumento/:id_asig",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"instrumento",
+												":id_asig"
+											],
+											"variable": [
+												{
+													"key": "id_asig"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"numeroReferentes\": \"<integer>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"numeroReferentes\": \"<integer>\"\n  }\n]"
+								},
+								{
+									"name": "Lista de Instrumentos vacia",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/instrumento/:id_asig",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"instrumento",
+												":id_asig"
+											],
+											"variable": [
+												{
+													"key": "id_asig"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "detalle",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "findById Instrumentos",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/instrumento/detalle/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"instrumento",
+												"detalle",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Obtener el detalle de un instrumento por su ID"
+									},
+									"response": [
+										{
+											"name": "Listado detallado del Instrumento creado con exito",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/instrumento/detalle/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"instrumento",
+														"detalle",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"asignatura\": {\n      \"id\": \"<long>\",\n      \"nombre\": \"<string>\"\n    },\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"asignatura\": {\n      \"id\": \"<long>\",\n      \"nombre\": \"<string>\"\n    },\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  }\n]"
+										},
+										{
+											"name": "Asignatura no encontrada",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/instrumento/detalle/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"instrumento",
+														"detalle",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "create Instrumento",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fecha\": \"<string>\",\n  \"nombre\": \"<string>\",\n  \"contenidos\": \"<string>\",\n  \"idAsignatura\": \"<long>\",\n  \"referentes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/instrumento/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"instrumento",
+								""
+							]
+						},
+						"description": "Creación de una Instrumento de Evaluación"
+					},
+					"response": [
+						{
+							"name": "Creación del Instrumento con exito",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fecha\": \"<string>\",\n  \"nombre\": \"<string>\",\n  \"contenidos\": \"<string>\",\n  \"idAsignatura\": \"<long>\",\n  \"referentes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/instrumento/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"instrumento",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"idAsignatura\": \"<long>\",\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<long>\",\n    \"fecha\": \"<string>\",\n    \"nombre\": \"<string>\",\n    \"contenidos\": \"<string>\",\n    \"idAsignatura\": \"<long>\",\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  }\n]"
+						},
+						{
+							"name": "Error en los datos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fecha\": \"<string>\",\n  \"nombre\": \"<string>\",\n  \"contenidos\": \"<string>\",\n  \"idAsignatura\": \"<long>\",\n  \"referentes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/instrumento/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"instrumento",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "asignatura",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "referente",
+							"item": [
+								{
+									"name": "{cod_ref}",
+									"item": [
+										{
+											"name": "editarDescripcion ReferenteEvaluacion",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"descripcion\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/asignatura/:id/referente/:cod_ref",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"asignatura",
+														":id",
+														"referente",
+														":cod_ref"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														},
+														{
+															"key": "cod_ref",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Editar la descripción del Referente de Evaluación de una Asignatura"
+											},
+											"response": [
+												{
+													"name": "Edición del Referente de Evaluación de la Asignatura realizado con exito",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"descripcion\": \"<string>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/asignatura/:id/referente/:cod_ref",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"asignatura",
+																":id",
+																"referente",
+																":cod_ref"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "cod_ref"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  }\n]"
+												},
+												{
+													"name": "Asignatura no encontrada",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n  \"descripcion\": \"<string>\"\n}",
+															"options": {
+																"raw": {
+																	"headerFamily": "json",
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{baseUrl}}/asignatura/:id/referente/:cod_ref",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"asignatura",
+																":id",
+																"referente",
+																":cod_ref"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "cod_ref"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "addReferenteEvaluacionToAsignatura",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"descripcion\": \"<string>\"\n  },\n  {\n    \"descripcion\": \"<string>\"\n  }\n]",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/asignatura/:id/referente",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"asignatura",
+												":id",
+												"referente"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Añadir uno o varios Referentes de Evaluación a una Asignatura"
+									},
+									"response": [
+										{
+											"name": "Crear Referentes de Evaluación para una Asignatura realizado con exito",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n  {\n    \"descripcion\": \"<string>\"\n  },\n  {\n    \"descripcion\": \"<string>\"\n  }\n]",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/asignatura/:id/referente",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"asignatura",
+														":id",
+														"referente"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Created",
+											"code": 201,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  }\n]"
+										},
+										{
+											"name": "Asignatura no encontrada",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "[\n  {\n    \"descripcion\": \"<string>\"\n  },\n  {\n    \"descripcion\": \"<string>\"\n  }\n]",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/asignatura/:id/referente",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"asignatura",
+														":id",
+														"referente"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "findById Asignatura",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/asignatura/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"asignatura",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Obtener una asignatura por su ID"
+							},
+							"response": [
+								{
+									"name": "Conseguir Asignatura con exito",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/asignatura/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"asignatura",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"referentes\": [\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      },\n      {\n        \"codReferente\": \"<string>\",\n        \"descripcion\": \"<string>\"\n      }\n    ]\n  }\n]"
+								},
+								{
+									"name": "Asignatura no encontrada",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/asignatura/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"asignatura",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "editarAsignatura",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"<string>\",\n  \"horas\": \"<integer>\",\n  \"descripcion\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/asignatura/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"asignatura",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Editar una Asignatura"
+							},
+							"response": [
+								{
+									"name": "Edición de la Asignatura realizada con exito",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"<string>\",\n  \"horas\": \"<integer>\",\n  \"descripcion\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/asignatura/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"asignatura",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"numReferentes\": \"<integer>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"numReferentes\": \"<integer>\"\n  }\n]"
+								},
+								{
+									"name": "Datos introducidos erroneos",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"<string>\",\n  \"horas\": \"<integer>\",\n  \"descripcion\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/asignatura/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"asignatura",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asignatura no encontrada",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"<string>\",\n  \"horas\": \"<integer>\",\n  \"descripcion\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/asignatura/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"asignatura",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "deleteMatricula de Alumno",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/asignatura/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"asignatura",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Eliminar Asignatura"
+							},
+							"response": [
+								{
+									"name": "Asignatura eliminada con exito",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/asignatura/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"asignatura",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asignatura no encontrada",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/asignatura/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"asignatura",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "findAll Asignatura",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/asignatura/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"asignatura",
+								""
+							]
+						},
+						"description": "Obtener todos los alumnos"
+					},
+					"response": [
+						{
+							"name": "Obtención de la Lista de Asignaturas realizada con exito",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/asignatura/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"asignatura",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"numReferentes\": \"<integer>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\",\n    \"numReferentes\": \"<integer>\"\n  }\n]"
+						},
+						{
+							"name": "Lista de Asignaturas no encontrada",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/asignatura/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"asignatura",
+										""
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "create Alumno",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"<string>\",\n  \"horas\": \"<integer>\",\n  \"descripcion\": \"<string>\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/asignatura/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"asignatura",
+								""
+							]
+						},
+						"description": "Creación de una asignatura"
+					},
+					"response": [
+						{
+							"name": "Creación de una Asignatura con exito",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"<string>\",\n  \"horas\": \"<integer>\",\n  \"descripcion\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/asignatura/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"asignatura",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"horas\": \"<integer>\",\n    \"descripcion\": \"<string>\"\n  }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "alumno",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "matricula",
+							"item": [
+								{
+									"name": "{id_asig}",
+									"item": [
+										{
+											"name": "addAsignaturaToAlumno",
+											"request": {
+												"method": "POST",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/alumno/:id/matricula/:id_asig",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"alumno",
+														":id",
+														"matricula",
+														":id_asig"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														},
+														{
+															"key": "id_asig",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Matriculación de un Alumno en una Asignatura"
+											},
+											"response": [
+												{
+													"name": "Matriculación de un Alumno a la Asignatura con exito",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/alumno/:id/matricula/:id_asig",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"alumno",
+																":id",
+																"matricula",
+																":id_asig"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "id_asig"
+																}
+															]
+														}
+													},
+													"status": "Created",
+													"code": 201,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Alumno no encontrado",
+													"originalRequest": {
+														"method": "POST",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/alumno/:id/matricula/:id_asig",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"alumno",
+																":id",
+																"matricula",
+																":id_asig"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "id_asig"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										},
+										{
+											"name": "deleteMatricula de Alumno",
+											"request": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/alumno/:id/matricula/:id_asig",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"alumno",
+														":id",
+														"matricula",
+														":id_asig"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														},
+														{
+															"key": "id_asig",
+															"value": "<long>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Eliminar matricula de una Asignatura de un Alumno"
+											},
+											"response": [
+												{
+													"name": "Matrícula eliminada del Alumno con exito",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/alumno/:id/matricula/:id_asig",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"alumno",
+																":id",
+																"matricula",
+																":id_asig"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "id_asig"
+																}
+															]
+														}
+													},
+													"status": "No Content",
+													"code": 204,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												},
+												{
+													"name": "Alumno no encontrado",
+													"originalRequest": {
+														"method": "DELETE",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/alumno/:id/matricula/:id_asig",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"alumno",
+																":id",
+																"matricula",
+																":id_asig"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "id_asig"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "findById Alumno",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/alumno/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"alumno",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Obtener un alumno por su ID"
+							},
+							"response": [
+								{
+									"name": "Alumno encontrado con exito",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/alumno/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"alumno",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"apellidos\": \"<string>\",\n    \"email\": \"<string>\",\n    \"telefono\": \"<string>\",\n    \"fechaNacimiento\": \"<string>\",\n    \"asignaturas\": [\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\"\n      },\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"apellidos\": \"<string>\",\n    \"email\": \"<string>\",\n    \"telefono\": \"<string>\",\n    \"fechaNacimiento\": \"<string>\",\n    \"asignaturas\": [\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\"\n      },\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\"\n      }\n    ]\n  }\n]"
+								},
+								{
+									"name": "Alumno no encontrado",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/alumno/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"alumno",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "editById Alumno",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"<string>\",\n  \"apellidos\": \"<string>\",\n  \"email\": \"<string>\",\n  \"telefono\": \"<string>\",\n  \"fechaNacimiento\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/alumno/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"alumno",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Editar alumno obtenido por su ID"
+							},
+							"response": [
+								{
+									"name": "Alumno editado con exito",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"<string>\",\n  \"apellidos\": \"<string>\",\n  \"email\": \"<string>\",\n  \"telefono\": \"<string>\",\n  \"fechaNacimiento\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/alumno/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"alumno",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"apellidos\": \"<string>\",\n    \"email\": \"<string>\",\n    \"telefono\": \"<string>\",\n    \"fechaNacimiento\": \"<string>\",\n    \"cantidadAsignaturas\": \"<integer>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"apellidos\": \"<string>\",\n    \"email\": \"<string>\",\n    \"telefono\": \"<string>\",\n    \"fechaNacimiento\": \"<string>\",\n    \"cantidadAsignaturas\": \"<integer>\"\n  }\n]"
+								},
+								{
+									"name": "Datos introducidos erroneos",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"<string>\",\n  \"apellidos\": \"<string>\",\n  \"email\": \"<string>\",\n  \"telefono\": \"<string>\",\n  \"fechaNacimiento\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/alumno/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"alumno",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Alumno no encontrado",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"nombre\": \"<string>\",\n  \"apellidos\": \"<string>\",\n  \"email\": \"<string>\",\n  \"telefono\": \"<string>\",\n  \"fechaNacimiento\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/alumno/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"alumno",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "deleteAlumno",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/alumno/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"alumno",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Eliminar Alumno obtenido por ID"
+							},
+							"response": [
+								{
+									"name": "Alumno eliminado con exito",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/alumno/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"alumno",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Alumno no encontrado",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/alumno/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"alumno",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "findAll Alumnos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/alumno/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alumno",
+								""
+							]
+						},
+						"description": "Obtener todos los alumnos"
+					},
+					"response": [
+						{
+							"name": "Listado de Alumnos con exito",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/alumno/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"alumno",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"apellidos\": \"<string>\",\n    \"email\": \"<string>\",\n    \"telefono\": \"<string>\",\n    \"fechaNacimiento\": \"<string>\",\n    \"cantidadAsignaturas\": \"<integer>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"apellidos\": \"<string>\",\n    \"email\": \"<string>\",\n    \"telefono\": \"<string>\",\n    \"fechaNacimiento\": \"<string>\",\n    \"cantidadAsignaturas\": \"<integer>\"\n  }\n]"
+						},
+						{
+							"name": "Lista de Alumnos no encontrada",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/alumno/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"alumno",
+										""
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "create Alumno",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"<string>\",\n  \"apellidos\": \"<string>\",\n  \"email\": \"<string>\",\n  \"telefono\": \"<string>\",\n  \"fechaNacimiento\": \"<string>\",\n  \"asignaturas\": [\n    \"<long>\",\n    \"<long>\"\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/alumno/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"alumno",
+								""
+							]
+						},
+						"description": "Creación de un alumno"
+					},
+					"response": [
+						{
+							"name": "Creación de Alumno con exito",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"<string>\",\n  \"apellidos\": \"<string>\",\n  \"email\": \"<string>\",\n  \"telefono\": \"<string>\",\n  \"fechaNacimiento\": \"<string>\",\n  \"asignaturas\": [\n    \"<long>\",\n    \"<long>\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/alumno/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"alumno",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"apellidos\": \"<string>\",\n    \"email\": \"<string>\",\n    \"telefono\": \"<string>\",\n    \"fechaNacimiento\": \"<string>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"apellidos\": \"<string>\",\n    \"email\": \"<string>\",\n    \"telefono\": \"<string>\",\n    \"fechaNacimiento\": \"<string>\"\n  }\n]"
+						},
+						{
+							"name": "Error en los datos",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"nombre\": \"<string>\",\n  \"apellidos\": \"<string>\",\n  \"email\": \"<string>\",\n  \"telefono\": \"<string>\",\n  \"fechaNacimiento\": \"<string>\",\n  \"asignaturas\": [\n    \"<long>\",\n    \"<long>\"\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/alumno/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"alumno",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "calificacion",
+			"item": [
+				{
+					"name": "referente",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "{cod_ref}",
+									"item": [
+										{
+											"name": "getAll Calificaciones by ReferenteEvaluacion",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/calificacion/referente/:id/:cod_ref",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"calificacion",
+														"referente",
+														":id",
+														":cod_ref"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "<long>",
+															"description": "(Required) "
+														},
+														{
+															"key": "cod_ref",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Obtener todas las Calificaciónes de un Referente de Evaluación de todos los Alumnos calificados"
+											},
+											"response": [
+												{
+													"name": "Obtención de la Lista de Calificaciones de una Asignatura realizada con exito",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "application/json"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/calificacion/referente/:id/:cod_ref",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"calificacion",
+																"referente",
+																":id",
+																":cod_ref"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "cod_ref"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"idAsignatura\": \"<long>\",\n    \"codReferente\": \"<string>\",\n    \"alumnos\": [\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\",\n        \"apellidos\": \"<string>\",\n        \"calificaciones\": [\n          {\n            \"idInstrumento\": \"<long>\",\n            \"calificacion\": \"<double>\"\n          },\n          {\n            \"idInstrumento\": \"<long>\",\n            \"calificacion\": \"<double>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\",\n        \"apellidos\": \"<string>\",\n        \"calificaciones\": [\n          {\n            \"idInstrumento\": \"<long>\",\n            \"calificacion\": \"<double>\"\n          },\n          {\n            \"idInstrumento\": \"<long>\",\n            \"calificacion\": \"<double>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"idAsignatura\": \"<long>\",\n    \"codReferente\": \"<string>\",\n    \"alumnos\": [\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\",\n        \"apellidos\": \"<string>\",\n        \"calificaciones\": [\n          {\n            \"idInstrumento\": \"<long>\",\n            \"calificacion\": \"<double>\"\n          },\n          {\n            \"idInstrumento\": \"<long>\",\n            \"calificacion\": \"<double>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\",\n        \"apellidos\": \"<string>\",\n        \"calificaciones\": [\n          {\n            \"idInstrumento\": \"<long>\",\n            \"calificacion\": \"<double>\"\n          },\n          {\n            \"idInstrumento\": \"<long>\",\n            \"calificacion\": \"<double>\"\n          }\n        ]\n      }\n    ]\n  }\n]"
+												},
+												{
+													"name": "Asignatura no encontrada",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/calificacion/referente/:id/:cod_ref",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"calificacion",
+																"referente",
+																":id",
+																":cod_ref"
+															],
+															"variable": [
+																{
+																	"key": "id"
+																},
+																{
+																	"key": "cod_ref"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "text",
+													"header": [],
+													"cookie": [],
+													"body": ""
+												}
+											]
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "instrumento",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "getAll Calificaciones by Instrumento",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/calificacion/instrumento/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"calificacion",
+												"instrumento",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<long>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Obtener todas las Calificaciónes de un Instrumento de todos los Alumnos calificados"
+									},
+									"response": [
+										{
+											"name": "Obtención de la Lista de Calificaciones de un Instrumento realizada con exito",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/calificacion/instrumento/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"calificacion",
+														"instrumento",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"idInstrumento\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"alumnos\": [\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\",\n        \"apellidos\": \"<string>\",\n        \"calificaciones\": [\n          {\n            \"codReferente\": \"<string>\",\n            \"nombre\": \"<string>\",\n            \"calificacion\": \"<double>\"\n          },\n          {\n            \"codReferente\": \"<string>\",\n            \"nombre\": \"<string>\",\n            \"calificacion\": \"<double>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\",\n        \"apellidos\": \"<string>\",\n        \"calificaciones\": [\n          {\n            \"codReferente\": \"<string>\",\n            \"nombre\": \"<string>\",\n            \"calificacion\": \"<double>\"\n          },\n          {\n            \"codReferente\": \"<string>\",\n            \"nombre\": \"<string>\",\n            \"calificacion\": \"<double>\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"idInstrumento\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"alumnos\": [\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\",\n        \"apellidos\": \"<string>\",\n        \"calificaciones\": [\n          {\n            \"codReferente\": \"<string>\",\n            \"nombre\": \"<string>\",\n            \"calificacion\": \"<double>\"\n          },\n          {\n            \"codReferente\": \"<string>\",\n            \"nombre\": \"<string>\",\n            \"calificacion\": \"<double>\"\n          }\n        ]\n      },\n      {\n        \"id\": \"<long>\",\n        \"nombre\": \"<string>\",\n        \"apellidos\": \"<string>\",\n        \"calificaciones\": [\n          {\n            \"codReferente\": \"<string>\",\n            \"nombre\": \"<string>\",\n            \"calificacion\": \"<double>\"\n          },\n          {\n            \"codReferente\": \"<string>\",\n            \"nombre\": \"<string>\",\n            \"calificacion\": \"<double>\"\n          }\n        ]\n      }\n    ]\n  }\n]"
+										},
+										{
+											"name": "Instrumento no encontrado",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/calificacion/instrumento/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"calificacion",
+														"instrumento",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "deleteCalificacion",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/calificacion/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"calificacion",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "<long>",
+											"description": "(Required) "
+										}
+									]
+								},
+								"description": "Eliminar una Calificación por su ID"
+							},
+							"response": [
+								{
+									"name": "Borrado de Calificación realizado con exito",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/calificacion/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"calificacion",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Calificación no encontrada",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/calificacion/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"calificacion",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "create Calificaciones",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"idInstrumento\": \"<long>\",\n  \"idAlumno\": \"<long>\",\n  \"calificaciones\": [\n    {\n      \"codReferente\": \"<string>\",\n      \"calificacion\": \"<double>\"\n    },\n    {\n      \"codReferente\": \"<string>\",\n      \"calificacion\": \"<double>\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/calificacion/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"calificacion",
+								""
+							]
+						},
+						"description": "Creación de un o varias Calificaciones"
+					},
+					"response": [
+						{
+							"name": "Añadir Calificación con exito",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idInstrumento\": \"<long>\",\n  \"idAlumno\": \"<long>\",\n  \"calificaciones\": [\n    {\n      \"codReferente\": \"<string>\",\n      \"calificacion\": \"<double>\"\n    },\n    {\n      \"codReferente\": \"<string>\",\n      \"calificacion\": \"<double>\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/calificacion/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"calificacion",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"idInstrumento\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"calificaciones\": [\n      {\n        \"id\": \"<long>\",\n        \"codReferente\": \"<string>\",\n        \"nombre\": \"<string>\",\n        \"calificacion\": \"<double>\"\n      },\n      {\n        \"id\": \"<long>\",\n        \"codReferente\": \"<string>\",\n        \"nombre\": \"<string>\",\n        \"calificacion\": \"<double>\"\n      }\n    ]\n  },\n  {\n    \"idInstrumento\": \"<long>\",\n    \"nombre\": \"<string>\",\n    \"calificaciones\": [\n      {\n        \"id\": \"<long>\",\n        \"codReferente\": \"<string>\",\n        \"nombre\": \"<string>\",\n        \"calificacion\": \"<double>\"\n      },\n      {\n        \"id\": \"<long>\",\n        \"codReferente\": \"<string>\",\n        \"nombre\": \"<string>\",\n        \"calificacion\": \"<double>\"\n      }\n    ]\n  }\n]"
+						},
+						{
+							"name": "Calificaciones no encontradas",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"idInstrumento\": \"<long>\",\n  \"idAlumno\": \"<long>\",\n  \"calificaciones\": [\n    {\n      \"codReferente\": \"<string>\",\n      \"calificacion\": \"<double>\"\n    },\n    {\n      \"codReferente\": \"<string>\",\n      \"calificacion\": \"<double>\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/calificacion/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"calificacion",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}

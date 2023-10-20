@@ -3,7 +3,13 @@
 
 El proyecto consiste en la implementación de una API REST que permita gestionar información sobre las calificaciones de alumnos en instrumentos de evaluación (exámenes, ejercicios, proyectos) de diversas asignaturas
 
-### Alumno
+# Instalación
+Ejecutaremos el programa con el siguiente comando:
+```shell
+mvn spring-boot:run
+```
+
+# Alumno
 
 | Método     | Ruta                               | Acción                                                  |
 |------------|-----------------------------------|---------------------------------------------------------|
@@ -16,7 +22,7 @@ El proyecto consiste en la implementación de una API REST que permita gestionar
 | `DELETE`     | /alumno/id/matricula/id_asig                        | removeAsignaturaToAlumno |
 
 
-### Asignatura
+# Asignatura
 
 | Método     | Ruta                               | Acción                                                  |
 |------------|-----------------------------------|---------------------------------------------------------|
@@ -28,7 +34,7 @@ El proyecto consiste en la implementación de una API REST que permita gestionar
 | `PUT`     | /asignatura/id/referente/cod_ref                     | editReferenteToAsignatura |
 | `DELETE`     | /asignatura/id                        | removeAsignatura |
 
-### Instrumento
+# Instrumento
 
 | Método     | Ruta                               | Acción                                                  |
 |------------|-----------------------------------|---------------------------------------------------------|
@@ -40,7 +46,7 @@ El proyecto consiste en la implementación de una API REST que permita gestionar
 | `POST`     | /instrumento/id/referente/cod_ref                   | addReferenteToInstrumento |
 | `DELETE`     | /instrumento/id/referente/cod_ref                        | removeReferenteToInstrumento |
 
-### Calificación
+# Calificación
 
 | Método     | Ruta                               | Acción                                                  |
 |------------|-----------------------------------|---------------------------------------------------------|
